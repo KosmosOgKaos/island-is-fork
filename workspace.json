@@ -2790,6 +2790,12 @@
               "!libs/application/templates/unemployment-benefits/**/*"
             ]
           }
+        },
+        "schemas/codegen": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "graphql-codegen --config libs/application/templates/unemployment-benefits/codegen.yml"
+          }
         }
       }
     },
