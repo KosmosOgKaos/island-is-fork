@@ -31,7 +31,7 @@ export const Prerequisites: Form = buildForm({
               type: 'SampleDataProvider',
               title: 'Staðfesting á ákveðnu atriði',
               subTitle:
-                'Betri lýsing á atriðinu sem er verið að sækja annarsstaðar frá',
+                'Sækja þarf gögn frá Þjóðskrá og atvinnumálastofnun',
             }),
           ],
         }),

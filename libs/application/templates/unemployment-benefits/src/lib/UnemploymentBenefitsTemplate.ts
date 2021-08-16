@@ -34,7 +34,7 @@ enum Roles {
   APPLICANT = 'applicant',
   ASSIGNEE = 'assignee',
 }
-const ExampleSchema = z.object({
+const DataSchema = z.object({
   approveExternalData: z.boolean().refine((v) => v),
   person: z.object({
     name: z.string().nonempty().max(256),
@@ -79,59 +79,29 @@ const UnemploymentBenefitsTemplate: ApplicationTemplate<
   ApplicationStateSchema<UnemploymentBenefitsEvent>,
   UnemploymentBenefitsEvent
 > = {
-  type: ApplicationTypes.EXAMPLE,
+  type: ApplicationTypes.UNEMPLOYMENT_BENEFITS,
   name: m.name,
   institution: m.institutionName,
-  translationNamespaces: [ApplicationConfigurations.ExampleForm.translation],
-  dataSchema: ExampleSchema,
+  translationNamespaces: [ApplicationConfigurations.UnemploymentBenefits.translation],
+  dataSchema: DataSchema,
   stateMachineConfig: {
-    initial: States.prerequisites,
+    initial: States.draft,
     states: {
-      [States.prerequisites]: {
-        meta: {
-          name: 'Skilyrði',
-          progress: 0,
-          lifecycle: {
-            shouldBeListed: false,
-            shouldBePruned: true,
-            // Applications that stay in this state for 24 hours will be pruned automatically
-            whenToPrune: 24 * 3600 * 1000,
-          },
-          roles: [
-            {
-              id: Roles.APPLICANT,
-              formLoader: () =>
-                import('../forms/Prerequisites').then((module) =>
-                  Promise.resolve(module.Prerequisites),
-                ),
-              actions: [
-                { event: 'SUBMIT', name: 'Staðfesta', type: 'primary' },
-              ],
-              write: 'all',
-            },
-          ],
-        },
-        on: {
-          SUBMIT: {
-            target: States.draft,
-          },
-        },
-      },
       [States.draft]: {
         meta: {
-          name: 'Umsókn um ökunám',
-          actionCard: {
-            title: m.draftTitle,
-            description: m.draftDescription,
-          },
+          name: 'Umsókn fyrir atvinnuleysisbætur',
+          // actionCard: {
+          //   title: m.draftTitle,
+          //   description: m.draftDescription,
+          // },
           progress: 0.25,
           lifecycle: DefaultStateLifeCycle,
           roles: [
             {
               id: Roles.APPLICANT,
               formLoader: () =>
-                import('../forms/ExampleForm').then((module) =>
-                  Promise.resolve(module.ExampleForm),
+                import('../forms/Application').then((module) =>
+                  Promise.resolve(module.application),
                 ),
               actions: [
                 { event: 'SUBMIT', name: 'Staðfesta', type: 'primary' },

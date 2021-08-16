@@ -1,12 +1,15 @@
 import {
+  Application,
   buildCheckboxField,
   buildForm,
   buildDescriptionField,
   buildMultiField,
   buildRadioField,
   buildSection,
+  buildExternalDataProvider,
   buildSubmitField,
   buildSubSection,
+  buildDataProviderItem,
   buildTextField,
   Comparators,
   Form,
@@ -16,16 +19,60 @@ import {
 } from '@island.is/application/core'
 import { ApiActions } from '../shared'
 import { m } from '../lib/messages'
+import get from 'lodash/get'
 
-export const ExampleForm: Form = buildForm({
+export const application: Form = buildForm({
   id: 'ExampleFormDraft',
   title: 'Atvinnuleysisbætur',
   mode: FormModes.APPLYING,
   children: [
     buildSection({
-      id: 'conditions',
+      id: 'externalData',
       title: m.conditionsSection,
-      children: [],
+      children: [
+        buildExternalDataProvider({
+          id: 'approveExternalData',
+          title: 'Utanaðkomandi gögn',
+          dataProviders: [
+            buildDataProviderItem({
+              id: 'sampleData',
+              type: 'SampleDataProvider',
+              title: 'Staðfesting á ákveðnu atriði',
+              subTitle:
+                'Sækja þarf gögn frá Þjóðskrá og atvinnumálastofnun',
+            }),
+          ],
+        }),
+        buildMultiField({
+          id: 'externalDataSuccess',
+          title: 'Tókst að sækja gögn',
+          children: [
+            buildDescriptionField({
+              id: 'externalDataSuccessDescription',
+              title: '',
+              description: (application: Application) =>
+                `Gildið frá data provider: ${get(
+                  application.externalData,
+                  'sampleData.data.fullName',
+                  'fannst ekki',
+                )}`,
+            }),
+            buildSubmitField({
+              id: 'toDraft',
+              placement: 'footer',
+              title: 'Hefja umsókn',
+              refetchApplicationAfterSubmit: true,
+              actions: [
+                {
+                  event: 'SUBMIT',
+                  name: 'Hefja umsókn',
+                  type: 'primary',
+                },
+              ],
+            }),
+          ],
+        }),
+      ],
     }),
     buildSection({
       id: 'intro',

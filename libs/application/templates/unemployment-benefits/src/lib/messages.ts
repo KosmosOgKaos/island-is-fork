@@ -39,7 +39,7 @@ export const m = defineMessages({
   introIntroduction: {
     id: 'example.application:intro.introduction',
     defaultMessage:
-      '*Hello*, **{name}**! [This is a link to Google!](http://google.com)',
+      'Staðfesta persónu upplýsingar',
     description: 'Some description',
   },
   about: {
