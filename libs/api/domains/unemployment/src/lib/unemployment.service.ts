@@ -31,8 +31,3 @@ export class UnemploymentService {
     }
   }
 }
-
-/*
-How is API auth handled today?
-Can we use island.is login?
-*/

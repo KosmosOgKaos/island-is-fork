@@ -12,10 +12,14 @@ import {
   NationalRegistryApi,
   ISLFjolskyldan,
 } from '@island.is/clients/national-registry-v1'
+import { NationalRegistryClient } from '@island.is/clients/national-registry-v3'
 
 @Injectable()
 export class NationalRegistryService {
-  constructor(private nationalRegistryApi: NationalRegistryApi) {}
+  constructor(
+    private nationalRegistryApi: NationalRegistryApi,
+    private nationalRegistryClient: NationalRegistryClient,
+  ) {}
 
   async getUser(nationalId: User['nationalId']): Promise<User> {
     const user = await this.nationalRegistryApi.getUser(nationalId)
@@ -142,5 +146,9 @@ export class NationalRegistryService {
       !this.isParent(person) &&
       kennitala.info(person.Kennitala).age < ADULT_AGE_LIMIT
     )
+  }
+
+  async getPerson(nationalId: string) {
+    return await this.nationalRegistryClient.getPerson(nationalId)
   }
 }

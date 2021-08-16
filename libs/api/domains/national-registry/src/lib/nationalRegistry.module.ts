@@ -6,9 +6,14 @@ import {
   NationalRegistryApi,
   NationalRegistryConfig,
 } from '@island.is/clients/national-registry-v1'
+import {
+  NationalRegistryClient,
+  NationalRegistryClientConfig,
+} from '@island.is/clients/national-registry-v3'
 
 export interface Config {
   nationalRegistry: NationalRegistryConfig
+  nationalRegistryClient: NationalRegistryClientConfig
 }
 
 export class NationalRegistryModule {
@@ -23,6 +28,11 @@ export class NationalRegistryModule {
           provide: NationalRegistryApi,
           useFactory: async () =>
             NationalRegistryApi.instanciateClass(config.nationalRegistry),
+        },
+        {
+          provide: NationalRegistryClient,
+          useFactory: async () =>
+            new NationalRegistryClient(config.nationalRegistryClient),
         },
       ],
       exports: [NationalRegistryService],

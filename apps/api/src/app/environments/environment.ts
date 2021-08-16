@@ -30,6 +30,9 @@ const devConfig = {
     password: process.env.SOFFIA_PASS ?? '',
     host: 'soffiaprufa.skra.is',
   },
+  nationalRegistryClient: {
+    url: 'http://localhost:4251',
+  },
   healthInsurance: {
     wsdlUrl:
       process.env.HEALTH_INSURANCE_XROAD_WSDLURL ??
@@ -180,6 +183,9 @@ const prodConfig = {
     user: process.env.SOFFIA_USER,
     password: process.env.SOFFIA_PASS,
     host: process.env.SOFFIA_HOST_URL,
+  },
+  nationalRegistryClient: {
+    url: process.env.NATIONAL_REGISTRY_URL,
   },
   healthInsurance: {
     wsdlUrl: process.env.HEALTH_INSURANCE_XROAD_WSDLURL,

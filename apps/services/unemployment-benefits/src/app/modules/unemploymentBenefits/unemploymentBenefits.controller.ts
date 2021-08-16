@@ -26,9 +26,15 @@ export class UnemploymentBenefitsController {
     private readonly unemploymentBenefitsService: UnemploymentBenefitsService,
   ) {}
 
+  @ApiOkResponse({
+    description: 'Finds party letter by manager given users authentication',
+    type: Person,
+  })
   @Get()
   async findPerson() {
-    const resource = this.unemploymentBenefitsService.findPersonByNationalId('0101307789')
+    const resource = this.unemploymentBenefitsService.findPersonByNationalId(
+      '0101307789',
+    )
 
     if (!resource) {
       throw new NotFoundException("This resource doesn't exist")

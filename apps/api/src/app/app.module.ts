@@ -149,6 +149,9 @@ const autoSchemaFile = environment.production
         password: environment.nationalRegistry.password,
         host: environment.nationalRegistry.host,
       },
+      nationalRegistryClient: {
+        url: environment.nationalRegistryClient.url,
+      },
     }),
     HealthInsuranceModule.register({
       wsdlUrl: environment.healthInsurance.wsdlUrl,

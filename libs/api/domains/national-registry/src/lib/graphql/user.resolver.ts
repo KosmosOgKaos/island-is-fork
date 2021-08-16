@@ -13,6 +13,7 @@ import { Audit } from '@island.is/nest/audit'
 import { NationalRegistryUser, Citizenship } from './models'
 import { NationalRegistryService } from '../nationalRegistry.service'
 import { User } from '../types'
+import { NationalRegistryGetPerson } from './models/person.model'
 
 @UseGuards(IdsUserGuard, ScopesGuard)
 @Resolver(() => NationalRegistryUser)
@@ -29,6 +30,15 @@ export class UserResolver {
   @Audit()
   user(@CurrentUser() user: AuthUser): Promise<User> {
     return this.nationalRegistryService.getUser(user.nationalId)
+  }
+
+  /*
+   * We make sure the model and type match here by not defining return type on getPerson in service
+   * This way the build will fail if changes are made to the underlying service since the types are generated at build
+   */
+  @Query(() => NationalRegistryGetPerson)
+  getPerson(@CurrentUser() user: AuthUser): Promise<NationalRegistryGetPerson> {
+    return this.nationalRegistryService.getPerson(user.nationalId)
   }
 
   @ResolveField('citizenship', () => Citizenship, { nullable: true })
