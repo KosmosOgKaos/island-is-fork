@@ -36,7 +36,7 @@ import { PartyLetterRegistryModule } from '@island.is/api/domains/party-letter-r
 import { LicenseServiceModule } from '@island.is/api/domains/license-service'
 import { AuditModule } from '@island.is/nest/audit'
 import { PaymentScheduleModule } from '@island.is/api/domains/payment-schedule'
-
+import { UnemploymentModule } from '@island.is/api/domains/unemployment'
 import { maskOutFieldsMiddleware } from './graphql.middleware'
 
 const debug = process.env.NODE_ENV === 'development'
@@ -242,6 +242,9 @@ const autoSchemaFile = environment.production
       xRoadClientId: environment.xroad.clientId,
       password: environment.paymentSchedule.password,
       username: environment.paymentSchedule.username,
+    }),
+    UnemploymentModule.register({
+      baseApiUrl: environment.unemployment.baseApiUrl,
     }),
   ],
 })

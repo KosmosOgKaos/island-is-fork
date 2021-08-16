@@ -146,6 +146,9 @@ const devConfig = {
     username: process.env.PAYMENT_SCHEDULE_USER,
     password: process.env.PAYMENT_SCHEDULE_PASSWORD,
   },
+  unemployment: {
+    baseApiUrl: 'Some base url',
+  },
 }
 
 const prodConfig = {
@@ -281,6 +284,9 @@ const prodConfig = {
     xRoadClientId: process.env.XROAD_CLIENT_ID,
     username: process.env.PAYMENT_SCHEDULE_USER,
     password: process.env.PAYMENT_SCHEDULE_PASSWORD,
+  },
+  unemployment: {
+    baseApiUrl: 'Some base url',
   },
 }
 

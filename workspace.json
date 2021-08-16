@@ -1259,6 +1259,36 @@
         }
       }
     },
+    "api-domains-unemployment": {
+      "root": "libs/api/domains/unemployment",
+      "sourceRoot": "libs/api/domains/unemployment/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/api/domains/unemployment/tsconfig.lib.json",
+              "libs/api/domains/unemployment/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/api/domains/unemployment/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/api/domains/unemployment/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/api/domains/unemployment"]
+        }
+      }
+    },
     "api-domains-payment": {
       "root": "libs/api/domains/payment",
       "sourceRoot": "libs/api/domains/payment/src",

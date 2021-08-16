@@ -49,6 +49,7 @@
       ],
       "@island.is/api/domains/auth": ["libs/api/domains/auth/src/index.ts"],
       "@island.is/api/domains/cms": ["libs/api/domains/cms/src/index.ts"],
+      "@island.is/api/domains/unemployment": ["libs/api/domains/unemployment/src/index.ts"],
       "@island.is/api/domains/communications": [
         "libs/api/domains/communications/src/index.ts"
       ],
