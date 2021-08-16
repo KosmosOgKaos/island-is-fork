@@ -26,12 +26,20 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        spouse_id: {
+        partner_id: {
           type: Sequelize.CHAR(10),
           references: {
             model: 'people',
             key: 'national_id',
           },
+        },
+        created: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        modified: {
+          type: Sequelize.DATE,
+          allowNull: false,
         },
       })
 
@@ -52,6 +60,14 @@ module.exports = {
             key: 'national_id',
           },
         },
+        created: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        modified: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
       })
       transaction.commit()
     } catch (err) {
@@ -61,7 +77,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('people')
     await queryInterface.dropTable('people_children')
+    await queryInterface.dropTable('people')
   },
 }

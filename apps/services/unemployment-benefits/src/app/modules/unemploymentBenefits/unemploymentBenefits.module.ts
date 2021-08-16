@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common'
 import { SequelizeModule } from '@nestjs/sequelize'
-import { Person } from './unemploymentBenefits.model'
+import { Person, Application } from './unemploymentBenefits.model'
 import { UnemploymentBenefitsService } from './unemploymentBenefits.service'
-import { UnemploymentBenefitsController } from './unemploymentBenefits.controller'
+import { NationalRegisterController } from './controllers/NationalRegister.controller'
+import { ApplicationController } from './controllers/application.controller'
 
 @Module({
-  imports: [SequelizeModule.forFeature([Person])],
-  controllers: [UnemploymentBenefitsController],
+  imports: [SequelizeModule.forFeature([Person, Application])],
+  controllers: [NationalRegisterController, ApplicationController],
   providers: [UnemploymentBenefitsService],
 })
 export class UnemploymentBenefitsModule {}

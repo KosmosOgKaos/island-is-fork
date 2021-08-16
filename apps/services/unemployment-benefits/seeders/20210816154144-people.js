@@ -10,6 +10,8 @@ module.exports = {
         address: 'Lindargata 3',
         email: 'gj@island.is',
         phone: '4265500',
+        created: new Date(),
+        modified: new Date(),
       },
       // child
       {
@@ -18,6 +20,8 @@ module.exports = {
         address: 'Lindargata 3',
         email: '',
         phone: '4265500',
+        created: new Date(),
+        modified: new Date(),
       },
 
       // parents
@@ -27,7 +31,9 @@ module.exports = {
         address: 'Nónsstígur 5',
         email: 'vg@island.is',
         phone: '4265501',
-        spouse: '0101304929',
+        partner_id: '0101304929',
+        created: new Date(),
+        modified: new Date(),
       },
       {
         national_id: '0101304929',
@@ -35,7 +41,9 @@ module.exports = {
         address: 'Nónsstígur 5',
         email: 'er@island.is',
         phone: '4265502',
-        spouse: '0101302989',
+        partner_id: '0101302989',
+        created: new Date(),
+        modified: new Date(),
       },
       //child
       {
@@ -44,34 +52,35 @@ module.exports = {
         address: 'Nónsstígur 5',
         email: '',
         phone: '4265502',
+        created: new Date(),
+        modified: new Date(),
       },
     ])
 
     await queryInterface.bulkInsert('people_children', [
       {
-        parent: '0101302989',
-        child: '0101504929',
+        parent_id: '0101302989',
+        child_id: '0101504929',
+        created: new Date(),
+        modified: new Date(),
       },
       {
-        parent: '0101304929',
-        child: '0101504929',
+        parent_id: '0101304929',
+        child_id: '0101504929',
+        created: new Date(),
+        modified: new Date(),
       },
 
       {
-        parent: '0101307789',
-        child: '0101507789',
+        parent_id: '0101307789',
+        child_id: '0101507789',
+        created: new Date(),
+        modified: new Date(),
       },
     ])
   },
 
   down: async (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
     await queryInterface.bulkDelete('people_children', null, {})
     await queryInterface.bulkDelete('people', null, {})
   },
