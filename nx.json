@@ -625,6 +625,9 @@
     "services-party-letter-registry-api": {
       "tags": []
     },
+    "services-unemployment-benefits": {
+      "tags": []
+    },
     "services-search-indexer": {
       "tags": []
     },
