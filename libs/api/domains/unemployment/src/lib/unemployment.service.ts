@@ -22,6 +22,7 @@ export class UnemploymentService {
 
   // TODO: Handle auth here
   submitApplication(application: SubmitApplicationDto) {
+    this.logger.info('Getting request', application)
     // TODO: Send to VMST here
     // TODO: Handle error response here
     return {
@@ -32,6 +33,6 @@ export class UnemploymentService {
 }
 
 /*
+How is API auth handled today?
 Can we use island.is login?
-How do we auth this app
 */

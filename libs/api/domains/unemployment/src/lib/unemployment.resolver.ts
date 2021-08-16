@@ -1,4 +1,4 @@
-import { Resolver, Query, Args } from '@nestjs/graphql'
+import { Resolver, Args, Mutation } from '@nestjs/graphql'
 import { IdsUserGuard } from '@island.is/auth-nest-tools'
 import { UseGuards } from '@nestjs/common'
 import { UnemploymentService } from './unemployment.service'
@@ -10,7 +10,7 @@ import { SubmitApplicationDto } from './dto/submitApplication.input'
 export class UnemploymentResolver {
   constructor(private unemploymentService: UnemploymentService) {}
 
-  @Query(() => SubmitApplicationResponse)
+  @Mutation(() => SubmitApplicationResponse)
   async unemploymentSubmitApplication(
     @Args('input') application: SubmitApplicationDto,
   ): Promise<SubmitApplicationResponse> {
