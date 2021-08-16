@@ -39,12 +39,6 @@ export const ReviewApplication: Form = buildForm({
               width: 'half',
             }),
             buildTextField({
-              id: 'person.age',
-              title: m.age,
-              disabled: true,
-              width: 'half',
-            }),
-            buildTextField({
               id: 'person.email',
               title: m.email,
               disabled: true,

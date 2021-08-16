@@ -13,7 +13,7 @@ export const m = defineMessages({
   },
   name: {
     id: 'example.application:name',
-    defaultMessage: 'Umsókn',
+    defaultMessage: 'Nafn',
     description: `Application's name`,
   },
   draftTitle: {
@@ -38,8 +38,7 @@ export const m = defineMessages({
   },
   introIntroduction: {
     id: 'example.application:intro.introduction',
-    defaultMessage:
-      'Staðfesta persónu upplýsingar',
+    defaultMessage: 'Staðfesta persónu upplýsingar',
     description: 'Some description',
   },
   about: {
@@ -57,9 +56,19 @@ export const m = defineMessages({
     defaultMessage: 'Kennitala',
     description: 'Some description',
   },
-  age: {
-    id: 'example.application:person.age',
-    defaultMessage: 'Aldur',
+  partnerId: {
+    id: 'example.application:person.partnerId',
+    defaultMessage: 'Kennitala Maka',
+    description: 'Some description',
+  },
+  childId: {
+    id: 'example.application:person.childId',
+    defaultMessage: 'Kennitala Barns',
+    description: 'Some description',
+  },
+  address: {
+    id: 'example.application:person.address',
+    defaultMessage: 'Heimilisfang',
     description: 'Some description',
   },
   email: {
@@ -132,5 +141,52 @@ export const m = defineMessages({
     id: 'example.application:dataSchema.national.id',
     defaultMessage: 'Kennitala þarf að vera gild.',
     description: 'Error message when the kennitala is invalid.',
+  },
+  paymentInformationSubSection: {
+    id: 'pl.application:payment.information.subsection',
+    defaultMessage: 'Greiðsluupplýsingar',
+    description: 'Payment Information',
+  },
+  paymentInformationName: {
+    id: 'pl.application:payment.information.name',
+    defaultMessage: 'Er allt eins og það á að vera?',
+    description: 'Is everything how it is supposed to be?',
+  },
+  paymentInformationBank: {
+    id: 'pl.application:payment.information.bank',
+    defaultMessage: 'Banki',
+    description: 'Bank',
+  },
+  pensionFund: {
+    id: 'pl.application:payment.information.pensionfund',
+    defaultMessage: 'Lífeyrissjóður',
+    description: 'Pension fund (optional)',
+  },
+  union: {
+    id: 'pl.application:payment.information.union',
+    defaultMessage: 'Stéttarfélag (valfrjálst)',
+    description: 'Union (optional)',
+  },
+  privatePensionFund: {
+    id: 'pl.application:payment.information.privatePensionFund',
+    defaultMessage: 'Séreignarsjóður',
+    description: 'Private pension fund',
+  },
+  privatePensionFundName: {
+    id: 'pl.application:payment.information.privatePensionFund.name',
+    defaultMessage: 'Óskarðu eftir því að greiða í séreignarsjóð?',
+    description: 'Do you wish to pay to a private pension fund?',
+  },
+  privatePensionFundRatio: {
+    id: 'pl.application:payment.information.privatePensionFund.ratio',
+    defaultMessage: 'Séreignarsjóður %',
+    description: 'Private pension fund %',
+  },
+  privatePensionFundDescription: {
+    id: 'pl.application:payment.information.privatePensionFund.description',
+    defaultMessage:
+      'Vinsamlegast athugaðu að Fæðingarorlofssjóður greiðir ekki mótframlag í séreignarsjóð.',
+    description:
+      'Note that Department of Parental Leave does not pay counter-contribution.',
   },
 })

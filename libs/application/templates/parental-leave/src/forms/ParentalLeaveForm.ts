@@ -260,7 +260,7 @@ export const ParentalLeaveForm: Form = buildForm({
                     } = await apolloClient.query<GetPrivatePensionFundsQuery>({
                       query: GetPrivatePensionFunds,
                     })
-
+                    
                     return (
                       data?.getPrivatePensionFunds?.map(({ id, name }) => ({
                         label: name,
