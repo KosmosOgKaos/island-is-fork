@@ -20,6 +20,7 @@ export enum ApplicationTypes {
   PAYABLE_DUMMY_TEMPLATE = 'PayableDummyTemplate',
   COMPLAINTS_TO_ALTHINGI_OMBUDSMAN = 'ComplaintsToAlthingiOmbudsman',
   ACCIDENT_NOTIFICATION = 'AccidentNotification',
+  UNEMPLOYMENT_BENEFITS = 'UnemploymentBenefits',
 }
 
 export const ApplicationConfigurations = {
@@ -107,4 +108,8 @@ export const ApplicationConfigurations = {
     slug: 'slysatilkynning',
     translation: 'an.application',
   },
+  [ApplicationTypes.UNEMPLOYMENT_BENEFITS]: {
+    slug: 'atvinnuleysisbaetur',
+    translation: 'ub.application',
+  }
 }
