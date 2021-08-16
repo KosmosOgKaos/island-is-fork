@@ -2771,6 +2771,28 @@
         }
       }
     },
+    "application-templates-unemployment-benefits": {
+      "root": "libs/application/templates/unemployment-benefits",
+      "sourceRoot": "libs/application/templates/unemployment-benefits/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/application/templates/unemployment-benefits/tsconfig.lib.json",
+              "libs/application/templates/unemployment-benefits/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/application/templates/unemployment-benefits/**/*"
+            ]
+          }
+        }
+      }
+    },
     "application-ui-components": {
       "root": "libs/application/ui-components",
       "sourceRoot": "libs/application/ui-components/src",
