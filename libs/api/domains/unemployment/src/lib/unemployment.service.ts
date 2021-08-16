@@ -3,10 +3,14 @@ import { LOGGER_PROVIDER } from '@island.is/logging'
 import { ApolloError } from 'apollo-server-express'
 import type { Logger } from '@island.is/logging'
 import { SubmitApplicationDto } from './dto/submitApplication.input'
+import { UnemploymentRegistryClient } from '@island.is/clients/unemployment-registry-v1'
 
 @Injectable()
 export class UnemploymentService {
-  constructor(@Inject(LOGGER_PROVIDER) private logger: Logger) {}
+  constructor(
+    @Inject(LOGGER_PROVIDER) private logger: Logger,
+    private unemploymentRegistryClient: UnemploymentRegistryClient,
+  ) {}
 
   private async handleError(error: any): Promise<never> {
     this.logger.error(JSON.stringify(error))
@@ -25,9 +29,6 @@ export class UnemploymentService {
     this.logger.info('Getting request', application)
     // TODO: Send to VMST here
     // TODO: Handle error response here
-    return {
-      id: 'SomeIdHere',
-      name: 'This is some guy',
-    }
+    return this.unemploymentRegistryClient.submitApplication(application)
   }
 }

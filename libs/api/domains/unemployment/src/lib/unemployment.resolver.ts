@@ -14,6 +14,6 @@ export class UnemploymentResolver {
   async unemploymentSubmitApplication(
     @Args('input') application: SubmitApplicationDto,
   ): Promise<SubmitApplicationResponse> {
-    return this.unemploymentService.submitApplication(application)
+    return await this.unemploymentService.submitApplication(application)
   }
 }

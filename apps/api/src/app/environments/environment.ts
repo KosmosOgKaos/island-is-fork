@@ -149,8 +149,8 @@ const devConfig = {
     username: process.env.PAYMENT_SCHEDULE_USER,
     password: process.env.PAYMENT_SCHEDULE_PASSWORD,
   },
-  unemployment: {
-    baseApiUrl: 'Some base url',
+  unemploymentRegistryClient: {
+    url: 'http://localhost:5555',
   },
 }
 
@@ -291,8 +291,8 @@ const prodConfig = {
     username: process.env.PAYMENT_SCHEDULE_USER,
     password: process.env.PAYMENT_SCHEDULE_PASSWORD,
   },
-  unemployment: {
-    baseApiUrl: 'Some base url',
+  unemploymentRegistryClient: {
+    url: process.env.UNEMPLOYMENT_REGISTRY_CLIENT,
   },
 }
 
