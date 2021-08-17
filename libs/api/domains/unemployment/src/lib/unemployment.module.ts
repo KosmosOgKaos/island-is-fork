@@ -28,3 +28,8 @@ export class UnemploymentModule {
     }
   }
 }
+
+/**
+ * We set up this module to demonstrate how a new module is added to the island.is api.
+ * Under normal circumstances we would extend the existing directorate-of-labour domain
+ */
