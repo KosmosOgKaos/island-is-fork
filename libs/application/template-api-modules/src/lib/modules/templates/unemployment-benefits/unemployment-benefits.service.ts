@@ -82,7 +82,9 @@ export class UnemploymentBenefitsService {
 
     if ('errors' in unemploymentApplicationResponse) {
       this.logger.error('Failed to create unemployment application')
-      throw new Error('Failed to create unemployment application')
+      throw new Error(
+        'Ekki tókst að senda inn umsókn, vinsamlegast reyndu aftur síðar.',
+      )
     }
 
     await this.sharedTemplateAPIService.sendEmail(
