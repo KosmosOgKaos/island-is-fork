@@ -3,6 +3,40 @@ import * as kennitala from 'kennitala'
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
 import { m } from './messages'
 
+export interface UnemploymentBenefitsSchema {
+  approveExternalData: boolean
+  person: {
+    name: string
+    nationalId: string
+    phoneNumber: string
+    email: string
+    address: string
+    partnerNationalId: string
+    childrenNationalId: string
+  }
+  secretWord?: string
+  getPaperCopy: 'yes' | 'no'
+  employmentStatus?: string
+  employmentRatio?: string
+  payments: {
+    bank: string
+    pensionFund?: string
+    union?: string
+    privatePensionFund?: string
+    pensionFundPercentage?: string
+    privatePensionFundPercentage?: string
+    unionPercentage?: string
+  }
+  personalTaxCreditRatio?: string
+  personalTaxCreditMonthlyAmount: string
+  monthlyIncome: string
+  insurancePayments: string
+  pensionPayments: string
+  incomeStepOne?: string
+  incomeStepTwo?: string
+  onParentalLeave: 'yes' | 'no'
+}
+
 export const DataSchema = z.object({
   approveExternalData: z.boolean().refine((v) => v),
   person: z.object({
@@ -64,3 +98,5 @@ export const DataSchema = z.object({
     .optional(),
   onParentalLeave: z.enum(['yes', 'no']),
 })
+
+export const ZodSchema: z.ZodSchema<UnemploymentBenefitsSchema> = DataSchema

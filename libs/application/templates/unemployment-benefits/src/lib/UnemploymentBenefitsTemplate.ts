@@ -55,6 +55,9 @@ const UnemploymentBenefitsTemplate: ApplicationTemplate<
             title: m.draftTitle,
             description: m.draftDescription,
           },
+          onExit: {
+            apiModuleAction: ApiActions.createApplication,
+          },
           progress: 0.25,
           lifecycle: DefaultStateLifeCycle,
           roles: [
@@ -65,7 +68,7 @@ const UnemploymentBenefitsTemplate: ApplicationTemplate<
                   Promise.resolve(module.application),
                 ),
               actions: [
-                { event: 'SUBMIT' , name: 'Staðfesta', type: 'primary' },
+                { event: 'SUBMIT', name: 'Staðfesta', type: 'primary' },
               ],
               write: 'all',
             },
