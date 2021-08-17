@@ -25,6 +25,7 @@ export class NationalRegistryService {
   ) {}
 
   async findPersonByNationalId(nationalId: string): Promise<Person | null> {
+    this.logger.debug(`Finding person by national id: ${nationalId}`)
     return await this.personModel.findOne({
       where: {
         nationalId,
@@ -35,6 +36,9 @@ export class NationalRegistryService {
   async findPersonAndChildrenByNationalId(
     nationalId: string,
   ): Promise<Person | null> {
+    this.logger.debug(
+      `Finding person and children by national id: ${nationalId}`,
+    )
     return await this.personModel.findOne({
       where: {
         nationalId,
@@ -44,6 +48,7 @@ export class NationalRegistryService {
   }
 
   async createPerson(create: CreatePersonDto): Promise<Person> {
+    this.logger.debug(`Creating person`)
     return await this.personModel.create(create).catch(handleDuplicateError)
   }
 
@@ -51,6 +56,7 @@ export class NationalRegistryService {
     nationalId: string,
     update: UpdatePersonDto,
   ): Promise<Person | null> {
+    this.logger.debug(`Updating person with national id ${nationalId}`)
     const [, persons] = await this.personModel.update(update, {
       where: { nationalId },
       returning: true,
@@ -59,6 +65,7 @@ export class NationalRegistryService {
   }
 
   async deletePerson(nationalId: string): Promise<boolean> {
+    this.logger.debug(`Deleting person with national id ${nationalId}`)
     const count = await this.personModel.destroy({
       where: { nationalId },
     })

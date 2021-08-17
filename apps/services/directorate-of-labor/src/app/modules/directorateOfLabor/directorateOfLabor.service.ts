@@ -22,6 +22,7 @@ export class DirectorateOfLaborService {
   ) {}
 
   async getApplicationById(applicationId: string): Promise<Application | null> {
+    this.logger.debug(`Finding application by id: ${applicationId}`)
     return await this.applicationModel.findOne({
       where: {
         applicationId,
@@ -30,6 +31,7 @@ export class DirectorateOfLaborService {
   }
 
   async createApplication(create: CreateApplicationDto): Promise<Application> {
+    this.logger.debug('Creating application')
     return await this.applicationModel.create(create)
   }
 
@@ -37,6 +39,7 @@ export class DirectorateOfLaborService {
     applicationId: string,
     update: UpdateApplicationDto,
   ): Promise<Application | null> {
+    this.logger.debug(`Updating application with id ${applicationId}`)
     const [, applications] = await this.applicationModel.update(update, {
       where: { applicationId },
       returning: true,
@@ -45,6 +48,7 @@ export class DirectorateOfLaborService {
   }
 
   async deleteApplication(applicationId: string): Promise<boolean> {
+    this.logger.debug(`Deleting application with id ${applicationId}`)
     const count = await this.applicationModel.destroy({
       where: { applicationId },
     })
