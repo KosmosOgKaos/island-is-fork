@@ -21,9 +21,11 @@ import {
   buildDateField,
   buildKeyValueField,
   buildDividerField,
+
 } from '@island.is/application/core'
 import { ApiActions } from '../shared'
 import { m } from '../lib/messages'
+import { NationalRegistryGetPerson } from '../types/schema'
 
 export const application: Form = buildForm({
   id: 'ExampleFormDraft',
@@ -74,37 +76,58 @@ export const application: Form = buildForm({
                 buildTextField({
                   id: 'person.name',
                   title: m.name,
+                  defaultValue: ({ externalData }: any) =>
+                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).name
                 }),
                 buildTextField({
                   id: 'person.nationalId',
                   title: m.nationalId,
                   width: 'half',
+                  defaultValue: ({ externalData }: any) =>
+                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).nationalId
                 }),
                 buildTextField({
                   id: 'person.phoneNumber',
                   title: m.phoneNumber,
                   width: 'half',
+                  defaultValue: ({ externalData }: any) =>
+                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).phoneNumber
                 }),
                 buildTextField({
                   id: 'person.email',
                   title: m.email,
                   width: 'half',
+                  defaultValue: ({ externalData }: any) =>
+                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).email
                 }),
                 buildTextField({
                   id: 'person.address',
                   title: m.address,
                   width: 'half',
+                  defaultValue: ({ externalData }: any) =>
+                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).address
                 }),
                 buildTextField({
                   id: 'person.partnerNationalId',
                   title: m.partnerId,
                   width: 'half',
                   required: false,
+                  defaultValue: ({ externalData }: any) =>
+                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).partnerNationalId
                 }),
                 buildTextField({
                   id: 'person.childrenNationalId',
                   title: m.childId,
                   width: 'half',
+                  defaultValue: ({ externalData }: any) =>
+                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).childrenNationalId[0]
+                }),
+                buildTextField({
+                  id: 'person.childrenNationalId',
+                  title: m.childId,
+                  width: 'half',
+                  defaultValue: ({ externalData }: any) =>
+                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).childrenNationalId[1],
                 }),
               ],
             }),
