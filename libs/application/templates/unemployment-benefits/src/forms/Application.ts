@@ -18,6 +18,7 @@ import {
   buildFileUploadField,
   buildCustomField,
   buildSelectField,
+  buildDateField,
 } from '@island.is/application/core'
 import { ApiActions } from '../shared'
 import { m } from '../lib/messages'
@@ -159,24 +160,6 @@ export const application: Form = buildForm({
               title: m.paymentInformationName,
               id: 'paymentscard',
               children: [
-                buildSelectField({
-                  id: 'employmentStatus',
-                  title: 'Aðstæður umsækjanda',
-                  options: [
-                    { value: 'Launþegi', label: 'Launþegi' },
-                    {
-                      value: 'Sjálfstætt starfandi',
-                      label: 'Sjálfstætt starfandi',
-                    },
-                  ],
-                  width: 'half',
-                }),
-                buildTextField({
-                  title: 'Starfshlutfall',
-                  id: 'employmentRatio',
-                  format: '###%',
-                  width: 'half',
-                }),
                 buildTextField({
                   title: 'Mánaðarlegar tekjur',
                   id: 'monthlyIncome',
@@ -311,6 +294,60 @@ export const application: Form = buildForm({
           ],
         }),
       ],
+    }),
+    buildSection({
+      id: 'employment',
+      title: 'Starf',
+      children: [
+        buildMultiField({
+          id: 'emp',
+          title: 'Fyrri störf',
+          children: [
+            buildSelectField({
+              id: 'employment.employmentStatus',
+              title: 'Aðstæður umsækjanda',
+              options: [
+                { value: 'Launþegi', label: 'Launþegi' },
+                {
+                  value: 'Sjálfstætt starfandi',
+                  label: 'Sjálfstætt starfandi',
+                },
+              ],
+              width: 'half',
+            }),
+            buildTextField({
+              id: 'employment.employmentRatio',
+              title: 'Starfshlutfall',
+              format: '###%',
+              width: 'half',
+            }),
+            buildTextField({
+              id: 'employment.employerName',
+              title: 'Nafn vinnuveitenda',
+              width: 'half',
+              condition: (answers) => (answers.employment as any)?.employmentStatus === 'Launþegi'
+            }),
+            buildTextField({
+              id: 'employment.employerEmail',
+              title: m.email,
+              width: 'half',
+              condition: (answers) => (answers.employment as any)?.employmentStatus === 'Launþegi'
+            }),
+            buildDateField({
+              id: 'employment.startDate',
+              title: 'Störf hafin',
+              width: 'half',
+              condition: (answers) => (answers.employment as any)?.employmentStatus === 'Launþegi'
+            }),
+            buildDateField({
+              id: 'employment.endDate',
+              title: 'Störfum lokið',
+              width: 'half',
+              condition: (answers) => (answers.employment as any)?.employmentStatus === 'Launþegi'
+            })
+          ]
+        }),
+      ]
     }),
     buildSection({
       id: 'confirmation',
