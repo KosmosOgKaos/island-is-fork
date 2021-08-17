@@ -154,7 +154,7 @@ export const m = defineMessages({
   },
   paymentInformationBank: {
     id: 'pl.application:payment.information.bank',
-    defaultMessage: 'Banki',
+    defaultMessage: 'Reikningsnúmer',
     description: 'Bank',
   },
   pensionFund: {

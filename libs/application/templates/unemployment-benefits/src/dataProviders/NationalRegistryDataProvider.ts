@@ -3,28 +3,16 @@ import {
   Application,
   SuccessfulDataProviderResult,
 } from '@island.is/application/core'
-
-interface NationalRegistryProviderData {
-  nationalId: string
-  name: string
-  phoneNumber: string
-  email: string
-  address: string
-  partnerNationalId: string
-  childrenNationalId: string[]
-}
+import { NationalRegistryGetPerson } from '../types/schema'
 
 type GetPersonResponse = {
-  getPerson: NationalRegistryProviderData
+  getPerson: NationalRegistryGetPerson
 }
 
 export class NationalRegistryDataProvider extends BasicDataProvider {
   type = 'NationalRegistryDataProvider'
 
-  async provide(
-    application: Application,
-  ): Promise<NationalRegistryProviderData> {
-    console.log('About to fetch data!!!!!')
+  async provide(application: Application): Promise<NationalRegistryGetPerson> {
     const query = `
       query getPerson {
         getPerson {
@@ -53,7 +41,7 @@ export class NationalRegistryDataProvider extends BasicDataProvider {
   }
 
   onProvideSuccess(
-    data: NationalRegistryProviderData,
+    data: NationalRegistryGetPerson,
   ): SuccessfulDataProviderResult {
     return {
       date: new Date(),

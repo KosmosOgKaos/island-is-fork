@@ -2,6 +2,7 @@ import * as z from 'zod'
 import * as kennitala from 'kennitala'
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
 import { m } from './messages'
+import { xor } from 'lodash'
 
 export interface UnemploymentBenefitsSchema {
   approveExternalData: boolean
@@ -12,12 +13,10 @@ export interface UnemploymentBenefitsSchema {
     email: string
     address: string
     partnerNationalId: string
-    childrenNationalId: string
+    childrenNationalId: string[]
   }
   secretWord?: string
   getPaperCopy: 'yes' | 'no'
-  employmentStatus?: string
-  employmentRatio?: string
   payments: {
     bank: string
     pensionFund?: string
@@ -29,12 +28,20 @@ export interface UnemploymentBenefitsSchema {
   }
   personalTaxCreditRatio?: string
   personalTaxCreditMonthlyAmount: string
-  monthlyIncome: string
-  insurancePayments: string
-  pensionPayments: string
+  monthlyIncome?: string
+  insurancePayments?: string
+  pensionPayments?: string
   incomeStepOne?: string
   incomeStepTwo?: string
   onParentalLeave: 'yes' | 'no'
+  employment?: {
+    employmentStatus: string
+    employmentRatio: string
+    employerEmail?: string
+    employerName?: string
+    startDate?: string
+    endDate?: string
+  }
 }
 
 export const DataSchema = z.object({
@@ -56,17 +63,14 @@ export const DataSchema = z.object({
     partnerNationalId: z.string().refine((n) => n && kennitala.isValid(n), {
       params: m.dataSchemeNationalId,
     }),
-    childrenNationalId: z.string().refine((n) => n && kennitala.isValid(n), {
-      params: m.dataSchemeNationalId,
-    }),
+    childrenNationalId: z.array(
+      z.string().refine((n) => n && kennitala.isValid(n), {
+        params: m.dataSchemeNationalId,
+      }),
+    ),
   }),
   secretWord: z.string().optional(),
   getPaperCopy: z.enum(['yes', 'no']),
-  employmentStatus: z.string().optional(),
-  employmentRatio: z
-    .string()
-    .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100)
-    .optional(),
   payments: z.object({
     bank: z.string().refine((b) => {
       const bankAccount = b.toString()
@@ -85,9 +89,18 @@ export const DataSchema = z.object({
     .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100)
     .optional(),
   personalTaxCreditMonthlyAmount: z.string().refine((x) => parseFloat(x)),
-  monthlyIncome: z.string().refine((x) => parseFloat(x)),
-  insurancePayments: z.string().refine((x) => parseFloat(x)),
-  pensionPayments: z.string().refine((x) => parseFloat(x)),
+  monthlyIncome: z
+    .string()
+    .refine((x) => parseFloat(x))
+    .optional(),
+  insurancePayments: z
+    .string()
+    .refine((x) => parseFloat(x))
+    .optional(),
+  pensionPayments: z
+    .string()
+    .refine((x) => parseFloat(x))
+    .optional(),
   incomeStepOne: z
     .string()
     .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100)
@@ -97,6 +110,16 @@ export const DataSchema = z.object({
     .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100)
     .optional(),
   onParentalLeave: z.enum(['yes', 'no']),
+  employment: z.object({
+    employmentStatus: z.string(),
+    employmentRatio: z
+      .string()
+      .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100),
+    employerEmail: z.string().email(),
+    employerName: z.string(),
+    startDate: z.string(),
+    endDate: z.string(),
+  }),
 })
 
 export const ZodSchema: z.ZodSchema<UnemploymentBenefitsSchema> = DataSchema
