@@ -16,7 +16,7 @@ import { SubmitApplicationDto } from './dto/submitApplication.input'
 export class UnemploymentResolver {
   constructor(private unemploymentService: UnemploymentService) {}
 
-  @Scopes(UnemploymentScope.main)
+  // @Scopes(UnemploymentScope.main) for this scope to actually work we would need to add it to the identity server
   @Mutation(() => SubmitApplicationResponse)
   @Audit()
   async unemploymentSubmitApplication(

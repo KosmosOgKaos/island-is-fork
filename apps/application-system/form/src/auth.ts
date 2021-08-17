@@ -30,7 +30,7 @@ if (userMocked) {
       UserProfileScope.read,
       NationalRegistryScope.individuals,
       EndorsementsScope.main,
-      UnemploymentScope.main,
+      // UnemploymentScope.main, for this scope to actually work we would need to add it to the identity server
     ],
     post_logout_redirect_uri: `${window.location.origin}`,
     userStorePrefix: 'as.',
