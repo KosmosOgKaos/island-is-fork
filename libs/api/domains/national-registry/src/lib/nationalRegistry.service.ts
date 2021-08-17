@@ -1,5 +1,7 @@
 import * as kennitala from 'kennitala'
-import { Injectable } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
+import { Logger, LOGGER_PROVIDER } from '@island.is/logging'
+import { ApolloError } from 'apollo-server-express'
 
 import {
   FamilyMember,
@@ -19,7 +21,20 @@ export class NationalRegistryService {
   constructor(
     private nationalRegistryApi: NationalRegistryApi,
     private nationalRegistryClient: NationalRegistryClient,
+    @Inject(LOGGER_PROVIDER) private logger: Logger,
   ) {}
+
+  private async handleError(error: any): Promise<never> {
+    this.logger.error(JSON.stringify(error))
+
+    if (error.json) {
+      const json = await error.json()
+      this.logger.error(json)
+      throw new ApolloError(JSON.stringify(json), error.status)
+    }
+
+    throw new ApolloError('Failed to resolve request', error.status)
+  }
 
   async getUser(nationalId: User['nationalId']): Promise<User> {
     const user = await this.nationalRegistryApi.getUser(nationalId)
@@ -149,6 +164,8 @@ export class NationalRegistryService {
   }
 
   async getPerson(nationalId: string) {
-    return await this.nationalRegistryClient.getPerson(nationalId)
+    return await this.nationalRegistryClient
+      .getPerson(nationalId)
+      .catch(this.handleError.bind(this))
   }
 }

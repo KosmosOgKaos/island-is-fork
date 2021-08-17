@@ -1,13 +1,13 @@
 import { Module, DynamicModule } from '@nestjs/common'
 import {
-  UnemploymentRegistryClient,
-  UnemploymentRegistryClientConfig,
-} from '@island.is/clients/unemployment-registry-v1'
+  DirectorateOfLaborClient,
+  DirectorateOfLaborClientConfig,
+} from '@island.is/clients/directorate-of-labor-v1'
 import { UnemploymentResolver } from './unemployment.resolver'
 import { UnemploymentService } from './unemployment.service'
 
 export interface Config {
-  unemploymentRegistryClient: UnemploymentRegistryClientConfig
+  directorateOfLaborClient: DirectorateOfLaborClientConfig
 }
 
 @Module({})
@@ -19,9 +19,9 @@ export class UnemploymentModule {
         UnemploymentResolver,
         UnemploymentService,
         {
-          provide: UnemploymentRegistryClient,
+          provide: DirectorateOfLaborClient,
           useFactory: async () =>
-            new UnemploymentRegistryClient(config.unemploymentRegistryClient),
+            new DirectorateOfLaborClient(config.directorateOfLaborClient),
         },
       ],
       exports: [],

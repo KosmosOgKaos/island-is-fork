@@ -3,13 +3,13 @@ import { LOGGER_PROVIDER } from '@island.is/logging'
 import { ApolloError } from 'apollo-server-express'
 import type { Logger } from '@island.is/logging'
 import { SubmitApplicationDto } from './dto/submitApplication.input'
-import { UnemploymentRegistryClient } from '@island.is/clients/unemployment-registry-v1'
+import { DirectorateOfLaborClient } from '@island.is/clients/directorate-of-labor-v1'
 
 @Injectable()
 export class UnemploymentService {
   constructor(
     @Inject(LOGGER_PROVIDER) private logger: Logger,
-    private unemploymentRegistryClient: UnemploymentRegistryClient,
+    private directorateOfLaborClient: DirectorateOfLaborClient,
   ) {}
 
   private async handleError(error: any): Promise<never> {
@@ -24,11 +24,9 @@ export class UnemploymentService {
     throw new ApolloError('Failed to resolve request', error.status)
   }
 
-  // TODO: Handle auth here
-  submitApplication(application: SubmitApplicationDto) {
-    this.logger.info('Getting request', application)
-    // TODO: Send to VMST here
-    // TODO: Handle error response here
-    return this.unemploymentRegistryClient.submitApplication(application)
+  submitApplication(nationalId: string, application: SubmitApplicationDto) {
+    return this.directorateOfLaborClient
+      .submitApplication(nationalId, application)
+      .catch(this.handleError.bind(this))
   }
 }

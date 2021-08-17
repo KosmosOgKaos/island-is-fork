@@ -2541,29 +2541,6 @@
           "options": {
             "command": "yarn ts-node -P libs/localization/tsconfig.lib.json libs/localization/scripts/extract 'libs/application/party-application/src/lib/messages.ts'"
           }
-        },
-        "schemas/codegen": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "command": "graphql-codegen --config libs/application/templates/party-application/codegen.yml"
-          }
-        },
-        "schemas/external-openapi-generator": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "nx run services-endorsements-api:schemas/external-openapi-generator $NX_OPTIONS",
-              "nx run services-endorsements-api:schemas/build-openapi $NX_OPTIONS",
-              "nx run application-templates-party-application:schemas/openapi-generator $NX_OPTIONS"
-            ],
-            "parallel": false
-          }
-        },
-        "schemas/openapi-generator": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "command": "yarn openapi-generator -o libs/application/template-api-modules/src/lib/modules/templates/party-application/gen/fetch -i apps/services/endorsements/api/src/openapi.yaml --additional-properties=enumPropertyNaming=original"
-          }
         }
       }
     },
@@ -2798,7 +2775,7 @@
               "yarn nx run services-national-registry:dev-services",
               "yarn nx run services-directorate-of-labor:dev-services",
               "yarn nx run application-system-api:dev-services",
-              "yarn nx run services-national-registry:migrate",
+              "yarn nx run application-system-api:migrate",
               "yarn nx run services-directorate-of-labor:migrate",
               "yarn nx run services-national-registry:seed"
             ],
@@ -3406,29 +3383,29 @@
         }
       }
     },
-    "clients-unemployment-registry-v1": {
-      "root": "libs/clients/unemployment-registry/v1",
-      "sourceRoot": "libs/clients/unemployment-registry/v1/src",
+    "clients-directorate-of-labor-v1": {
+      "root": "libs/clients/directorate-of-labor/v1",
+      "sourceRoot": "libs/clients/directorate-of-labor/v1/src",
       "projectType": "library",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/clients/unemployment-registry/v1/**/*.ts"]
+            "lintFilePatterns": ["libs/clients/directorate-of-labor/v1/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/clients/unemployment-registry/v1"],
+          "outputs": ["coverage/libs/clients/directorate-of-labor/v1"],
           "options": {
-            "jestConfig": "libs/clients/unemployment-registry/v1/jest.config.js",
+            "jestConfig": "libs/clients/directorate-of-labor/v1/jest.config.js",
             "passWithNoTests": true
           }
         },
         "schemas/openapi-generator": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "command": "yarn openapi-generator -o libs/clients/unemployment-registry/v1/gen/fetch -i apps/services/unemployment-benefits/src/openapi.yaml --additional-properties=enumPropertyNaming=original"
+            "command": "yarn openapi-generator -o libs/clients/directorate-of-labor/v1/gen/fetch -i apps/services/directorate-of-labor/openapi.yaml --additional-properties=enumPropertyNaming=original"
           }
         }
       }
@@ -7587,6 +7564,13 @@
           "options": {
             "outputPath": "apps/services/directorate-of-labor/src/openapi.yaml",
             "command": "yarn ts-node -P apps/services/directorate-of-labor/tsconfig.app.json apps/services/directorate-of-labor/src/buildOpenApi.ts"
+          }
+        },
+        "seed": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "../../../node_modules/.bin/sequelize-cli db:seed:all",
+            "cwd": "apps/services/directorate-of-labor"
           }
         },
         "migrate": {

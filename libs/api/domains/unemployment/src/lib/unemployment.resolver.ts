@@ -1,5 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql'
-import { IdsUserGuard } from '@island.is/auth-nest-tools'
+import { CurrentUser, IdsUserGuard, User } from '@island.is/auth-nest-tools'
 import { UseGuards } from '@nestjs/common'
 import { UnemploymentService } from './unemployment.service'
 import { SubmitApplicationResponse } from './models/submitApplicationResponse.model'
@@ -12,8 +12,12 @@ export class UnemploymentResolver {
 
   @Mutation(() => SubmitApplicationResponse)
   async unemploymentSubmitApplication(
+    @CurrentUser() auth: User,
     @Args('input') application: SubmitApplicationDto,
   ): Promise<SubmitApplicationResponse> {
-    return await this.unemploymentService.submitApplication(application)
+    return await this.unemploymentService.submitApplication(
+      auth.nationalId,
+      application,
+    )
   }
 }

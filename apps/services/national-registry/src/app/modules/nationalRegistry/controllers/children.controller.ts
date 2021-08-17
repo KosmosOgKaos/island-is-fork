@@ -18,6 +18,7 @@ export class ChildrenController {
     if (!parent) {
       throw new NotFoundException("This resource doesn't exist")
     }
+
     return parent.children
   }
 }
