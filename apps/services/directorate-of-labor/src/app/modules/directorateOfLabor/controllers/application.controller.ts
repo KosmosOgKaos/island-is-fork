@@ -1,4 +1,4 @@
-import { ApiOkResponse } from '@nestjs/swagger'
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import {
   Body,
   Controller,
@@ -19,12 +19,17 @@ const assertExists = <T>(resource: T): void => {
     throw new NotFoundException("This resource doesn't exist")
   }
 }
-
 @Controller('v1/applications')
 export class ApplicationController {
   constructor(
     private readonly directorateOfLaborService: DirectorateOfLaborService,
   ) {}
+
+  @Get()
+  @ApiOkResponse({ type: Application })
+  async getAllApplications() {
+    return await this.directorateOfLaborService.getAllApplications()
+  }
 
   @Get(':applicationId')
   @ApiOkResponse({ type: Application })

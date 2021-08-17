@@ -21,6 +21,11 @@ export class DirectorateOfLaborService {
     private logger: Logger,
   ) {}
 
+  async getAllApplications(): Promise<Application[]> {
+    this.logger.debug(`Finding all applications`)
+    return await this.applicationModel.findAll()
+  }
+
   async getApplicationById(applicationId: string): Promise<Application | null> {
     this.logger.debug(`Finding application by id: ${applicationId}`)
     return await this.applicationModel.findOne({
