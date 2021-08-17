@@ -7,6 +7,6 @@ bootstrap({
   appModule: AppModule,
   name: 'services-national-registry',
   openApi,
-  port: 4251,
+  port: 4250,
   swaggerPath: '',
 })
