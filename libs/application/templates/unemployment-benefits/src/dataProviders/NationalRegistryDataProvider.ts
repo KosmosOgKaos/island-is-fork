@@ -12,13 +12,7 @@ type GetPersonResponse = {
 export class NationalRegistryDataProvider extends BasicDataProvider {
   type = 'NationalRegistryDataProvider'
 
-<<<<<<< Updated upstream
   async provide(application: Application): Promise<NationalRegistryGetPerson> {
-=======
-  async provide(
-    application: Application,
-  ): Promise<NationalRegistryProviderData> {
->>>>>>> Stashed changes
     const query = `
     query getPerson {
       getPerson {

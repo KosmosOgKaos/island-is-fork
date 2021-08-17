@@ -39,7 +39,6 @@ export class NationalRegistryClient {
     const response = await this.nationalRegistryApi.peopleControllerFindPerson({
       nationalId,
     })
-    console.log('Got person', response)
 
     return {
       name: response.fullName,

@@ -2,7 +2,6 @@ import * as z from 'zod'
 import * as kennitala from 'kennitala'
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
 import { m } from './messages'
-import { xor } from 'lodash'
 
 export interface UnemploymentBenefitsSchema {
   approveExternalData: boolean
