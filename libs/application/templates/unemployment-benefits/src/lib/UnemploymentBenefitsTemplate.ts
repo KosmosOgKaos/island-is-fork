@@ -85,12 +85,6 @@ const UnemploymentBenefitsTemplate: ApplicationTemplate<
           name: 'Employer Review',
           progress: 0.75,
           lifecycle: DefaultStateLifeCycle,
-          // onEntry: {
-          //   apiModuleAction: ApiActions.createApplication,
-          // },
-          // onExit: {
-          //   apiModuleAction: ApiActions.completeApplication,
-          // },
           roles: [
             {
               id: Roles.ASSIGNEE,
