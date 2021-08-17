@@ -32,6 +32,17 @@ export class NationalRegistryService {
     })
   }
 
+  async findPersonAndChildrenByNationalId(
+    nationalId: string,
+  ): Promise<Person | null> {
+    return await this.personModel.findOne({
+      where: {
+        nationalId,
+      },
+      include: [Person],
+    })
+  }
+
   async createPerson(create: CreatePersonDto): Promise<Person> {
     return await this.personModel.create(create).catch(handleDuplicateError)
   }

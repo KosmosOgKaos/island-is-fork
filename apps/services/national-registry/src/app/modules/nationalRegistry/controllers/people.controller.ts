@@ -31,7 +31,7 @@ export class PeopleController {
   @Get(':nationalId')
   @ApiOkResponse({ type: Person })
   async findPerson(@Param('nationalId') nationalId: string) {
-    const person = this.nationalRegistryService.findPersonByNationalId(
+    const person = await this.nationalRegistryService.findPersonByNationalId(
       nationalId,
     )
     assertExists(person)

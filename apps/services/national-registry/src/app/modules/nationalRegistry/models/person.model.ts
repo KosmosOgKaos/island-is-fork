@@ -6,7 +6,9 @@ import {
   Table,
   CreatedAt,
   UpdatedAt,
+  BelongsToMany,
 } from 'sequelize-typescript'
+import { PersonChild } from './personChild.model'
 
 @Table({
   tableName: 'people',
@@ -53,6 +55,9 @@ export class Person extends Model<Person> {
     allowNull: true,
   })
   partnerId!: string
+
+  @BelongsToMany(() => Person, () => PersonChild, 'parentId', 'childId')
+  children!: Person[]
 
   @ApiProperty()
   @CreatedAt
