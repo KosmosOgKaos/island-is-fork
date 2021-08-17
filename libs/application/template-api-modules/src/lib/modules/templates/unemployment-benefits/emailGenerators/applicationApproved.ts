@@ -11,17 +11,21 @@ export const generateApplicationApprovedEmail: EmailTemplateGenerator = (
     options: { email },
   } = props
 
-  const applicantEmail = get(application.answers, 'employment.employerEmail')
-  console.log('\n\n\n APPLICANT EMAIL: ' + applicantEmail + '\n\n\n')
-  console.log('\n\n\n  EMAIL: ' + email.sender + '\n\n\n')
-  console.log('\n\n\n  EMAIL: ' + email.address + '\n\n\n')
+  const employerEmail = get(application.answers, 'employment.employerEmail')
+  const employerName = get(application.answers, 'employment.employerName')
+  const ratio= get(application.answers, 'employment.employmentRatio')
+  const start = get(application.answers, 'employment.startDate')
+  const end = get(application.answers, 'employment.endDate')
+  const applicantName = get(application.answers, 'person.name')
 
   const subject = 'Umsókn um atvinnuleysisbætur'
   const body = dedent(`
-        vinsamlegast staðfestið atvinnuleysis umsókn inná .....
-
-        <b>kv: </b>${email}
-
+    Sæl-/l 
+    Póstur vegna umsóknar um atvinnuleysisbætur.
+    Vinsamlegast staðfestið að ${applicantName} hafi starfað hjá ${employerName} á eftirfarandi tímabili ${start} til ${end} í ${ratio} starfshlutfalli.
+    Farið er inn á atvinnurekendagátt Vinnumálastofnunar til að stafesta eða hafna erindi.
+    Bestu kveðjur,
+    Vinnumálastofnun
 
       `)
 
@@ -33,7 +37,7 @@ export const generateApplicationApprovedEmail: EmailTemplateGenerator = (
     to: [
       {
         name: '',
-        address: applicantEmail as string,
+        address: employerEmail as string,
       },
     ],
     subject,
