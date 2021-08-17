@@ -65,6 +65,16 @@ module.exports = {
         created: new Date(),
         modified: new Date(),
       },
+      {
+        national_id: '1511982449',
+        full_name: 'Alex',
+        address: 'Nónsstígur 5',
+        email: 'vg@island.is',
+        phone: '4265501',
+        partner_id: '0101304929',
+        created: new Date(),
+        modified: new Date(),
+      },
     ])
 
     await queryInterface.bulkInsert('people_children', [
