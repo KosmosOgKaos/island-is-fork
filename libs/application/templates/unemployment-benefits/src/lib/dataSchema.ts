@@ -93,10 +93,12 @@ export const DataSchema = z.object({
     .optional(),
   insurancePayments: z
     .string()
-    .refine((x) => parseFloat(x)),
+    .refine((x) => parseFloat(x))
+    .optional(),
   pensionPayments: z
     .string()
-    .refine((x) => parseFloat(x)),
+    .refine((x) => parseFloat(x))
+    .optional(),
   incomeStepOne: z
     .string()
     .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100)

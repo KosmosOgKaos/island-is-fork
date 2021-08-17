@@ -12,18 +12,17 @@ export const generateApplicationApprovedEmail: EmailTemplateGenerator = (
   } = props
 
   const applicantEmail = get(application.answers, 'employment.employerEmail')
+  console.log('\n\n\n APPLICANT EMAIL: ' + applicantEmail + '\n\n\n')
+  console.log('\n\n\n  EMAIL: ' + email.sender + '\n\n\n')
+  console.log('\n\n\n  EMAIL: ' + email.address + '\n\n\n')
 
-
-  const subject = 'Meðmæli með framboðslista uppfyllir skilyrði'
+  const subject = 'Umsókn um atvinnuleysisbætur'
   const body = dedent(`
-        Meðmæli með framboðslista <strong>uppfyllir skilyrði</strong> yfirkjörstjórnar. 
+        vinsamlegast staðfestið atvinnuleysis umsókn inná .....
 
-        <b>Stjórnmálasamtök: </b>${email}
+        <b>kv: </b>${email}
 
 
-        <b>Athugasemd frá yfirkjörstjórn: </b>${
-          application.answers.reasonForReject ?? 'Engin athugasemd'
-        }
       `)
 
   return {
