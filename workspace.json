@@ -2791,6 +2791,33 @@
             ]
           }
         },
+        "dev/init": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "yarn nx run services-national-registry:dev-services",
+              "yarn nx run services-directorate-of-labor:dev-services",
+              "yarn nx run application-system-api:dev-services",
+              "yarn nx run services-national-registry:migrate",
+              "yarn nx run services-directorate-of-labor:migrate",
+              "yarn nx run services-national-registry:seed"
+            ],
+            "parallel": false
+          }
+        },
+        "dev": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "yarn start services-national-registry &",
+              "yarn start services-directorate-of-labor &",
+              "yarn start application-system-api &",
+              "yarn start application-system-form &",
+              "yarn start api &"
+            ],
+            "parallel": true
+          }
+        },
         "schemas/codegen": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
@@ -7573,13 +7600,6 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "command": "../../../node_modules/.bin/sequelize-cli db:migrate:undo",
-            "cwd": "apps/services/directorate-of-labor"
-          }
-        },
-        "seed": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "command": "../../../node_modules/.bin/sequelize-cli db:seed",
             "cwd": "apps/services/directorate-of-labor"
           }
         },
