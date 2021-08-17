@@ -31,7 +31,7 @@ const devConfig = {
     host: 'soffiaprufa.skra.is',
   },
   nationalRegistryClient: {
-    url: 'http://localhost:4251',
+    url: 'http://localhost:4250',
   },
   healthInsurance: {
     wsdlUrl:
