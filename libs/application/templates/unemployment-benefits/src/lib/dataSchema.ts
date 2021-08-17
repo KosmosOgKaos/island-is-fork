@@ -13,7 +13,7 @@ export interface UnemploymentBenefitsSchema {
     email: string
     address: string
     partnerNationalId: string
-    childrenNationalId: string
+    childrenNationalId: string[]
   }
   secretWord?: string
   getPaperCopy: 'yes' | 'no'
@@ -63,9 +63,11 @@ export const DataSchema = z.object({
     partnerNationalId: z.string().refine((n) => n && kennitala.isValid(n), {
       params: m.dataSchemeNationalId,
     }),
-    childrenNationalId: z.string().refine((n) => n && kennitala.isValid(n), {
-      params: m.dataSchemeNationalId,
-    }),
+    childrenNationalId: z.array(
+      z.string().refine((n) => n && kennitala.isValid(n), {
+        params: m.dataSchemeNationalId,
+      }),
+    ),
   }),
   secretWord: z.string().optional(),
   getPaperCopy: z.enum(['yes', 'no']),
@@ -87,9 +89,18 @@ export const DataSchema = z.object({
     .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100)
     .optional(),
   personalTaxCreditMonthlyAmount: z.string().refine((x) => parseFloat(x)),
-  monthlyIncome: z.string().refine((x) => parseFloat(x)).optional(),
-  insurancePayments: z.string().refine((x) => parseFloat(x)).optional(),
-  pensionPayments: z.string().refine((x) => parseFloat(x)).optional(),
+  monthlyIncome: z
+    .string()
+    .refine((x) => parseFloat(x))
+    .optional(),
+  insurancePayments: z
+    .string()
+    .refine((x) => parseFloat(x))
+    .optional(),
+  pensionPayments: z
+    .string()
+    .refine((x) => parseFloat(x))
+    .optional(),
   incomeStepOne: z
     .string()
     .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100)
@@ -99,7 +110,7 @@ export const DataSchema = z.object({
     .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100)
     .optional(),
   onParentalLeave: z.enum(['yes', 'no']),
-  employment: z.object ({
+  employment: z.object({
     employmentStatus: z.string(),
     employmentRatio: z
       .string()
@@ -107,8 +118,8 @@ export const DataSchema = z.object({
     employerEmail: z.string().email(),
     employerName: z.string(),
     startDate: z.string(),
-    endDate: z.string()
-  })
+    endDate: z.string(),
+  }),
 })
 
 export const ZodSchema: z.ZodSchema<UnemploymentBenefitsSchema> = DataSchema

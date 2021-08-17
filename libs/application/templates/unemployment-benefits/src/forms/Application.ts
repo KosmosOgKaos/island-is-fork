@@ -21,7 +21,6 @@ import {
   buildDateField,
   buildKeyValueField,
   buildDividerField,
-
 } from '@island.is/application/core'
 import { ApiActions } from '../shared'
 import { m } from '../lib/messages'
@@ -77,35 +76,40 @@ export const application: Form = buildForm({
                   id: 'person.name',
                   title: m.name,
                   defaultValue: ({ externalData }: any) =>
-                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).name
+                    (externalData?.nationalRegistry
+                      .data as NationalRegistryGetPerson).name,
                 }),
                 buildTextField({
                   id: 'person.nationalId',
                   title: m.nationalId,
                   width: 'half',
                   defaultValue: ({ externalData }: any) =>
-                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).nationalId
+                    (externalData?.nationalRegistry
+                      .data as NationalRegistryGetPerson).nationalId,
                 }),
                 buildTextField({
                   id: 'person.phoneNumber',
                   title: m.phoneNumber,
                   width: 'half',
                   defaultValue: ({ externalData }: any) =>
-                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).phoneNumber
+                    (externalData?.nationalRegistry
+                      .data as NationalRegistryGetPerson).phoneNumber,
                 }),
                 buildTextField({
                   id: 'person.email',
                   title: m.email,
                   width: 'half',
                   defaultValue: ({ externalData }: any) =>
-                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).email
+                    (externalData?.nationalRegistry
+                      .data as NationalRegistryGetPerson).email,
                 }),
                 buildTextField({
                   id: 'person.address',
                   title: m.address,
                   width: 'half',
                   defaultValue: ({ externalData }: any) =>
-                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).address
+                    (externalData?.nationalRegistry
+                      .data as NationalRegistryGetPerson).address,
                 }),
                 buildTextField({
                   id: 'person.partnerNationalId',
@@ -113,21 +117,24 @@ export const application: Form = buildForm({
                   width: 'half',
                   required: false,
                   defaultValue: ({ externalData }: any) =>
-                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).partnerNationalId
+                    (externalData?.nationalRegistry
+                      .data as NationalRegistryGetPerson).partnerNationalId,
                 }),
                 buildTextField({
                   id: 'person.childrenNationalId',
                   title: m.childId,
                   width: 'half',
                   defaultValue: ({ externalData }: any) =>
-                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).childrenNationalId[0]
+                    (externalData?.nationalRegistry
+                      .data as NationalRegistryGetPerson).childrenNationalId[0],
                 }),
                 buildTextField({
                   id: 'person.childrenNationalId',
                   title: m.childId,
                   width: 'half',
                   defaultValue: ({ externalData }: any) =>
-                  (externalData?.nationalRegistry.data as NationalRegistryGetPerson).childrenNationalId[1],
+                    (externalData?.nationalRegistry
+                      .data as NationalRegistryGetPerson).childrenNationalId[1],
                 }),
               ],
             }),
@@ -350,29 +357,33 @@ export const application: Form = buildForm({
               id: 'employment.employerName',
               title: 'Nafn vinnuveitenda',
               width: 'half',
-              condition: (answers) => (answers.employment as any)?.employmentStatus === 'Launþegi'
+              condition: (answers) =>
+                (answers.employment as any)?.employmentStatus === 'Launþegi',
             }),
             buildTextField({
               id: 'employment.employerEmail',
               title: m.email,
               width: 'half',
-              condition: (answers) => (answers.employment as any)?.employmentStatus === 'Launþegi'
+              condition: (answers) =>
+                (answers.employment as any)?.employmentStatus === 'Launþegi',
             }),
             buildDateField({
               id: 'employment.startDate',
               title: 'Störf hafin',
               width: 'half',
-              condition: (answers) => (answers.employment as any)?.employmentStatus === 'Launþegi'
+              condition: (answers) =>
+                (answers.employment as any)?.employmentStatus === 'Launþegi',
             }),
             buildDateField({
               id: 'employment.endDate',
               title: 'Störfum lokið',
               width: 'half',
-              condition: (answers) => (answers.employment as any)?.employmentStatus === 'Launþegi'
-            })
-          ]
+              condition: (answers) =>
+                (answers.employment as any)?.employmentStatus === 'Launþegi',
+            }),
+          ],
         }),
-      ]
+      ],
     }),
     buildSection({
       id: 'confirmation',
@@ -399,46 +410,174 @@ export const application: Form = buildForm({
             buildKeyValueField({
               label: 'Nafn',
               width: 'half',
-              value: (app) => (app.answers.person as any)?.name
+              value: (app) => (app.answers.person as any)?.name,
             }),
             buildKeyValueField({
               label: 'Kennitala',
               width: 'half',
-              value: (app) => (app.answers.person as any)?.nationalId
+              value: (app) => (app.answers.person as any)?.nationalId,
             }),
             buildKeyValueField({
               label: 'Netfang',
               width: 'half',
-              value: (app) => (app.answers.person as any)?.email
+              value: (app) => (app.answers.person as any)?.email,
             }),
             buildKeyValueField({
               label: 'Heimilisfang',
               width: 'half',
-              value: (app) => (app.answers.person as any)?.address
+              value: (app) => (app.answers.person as any)?.address,
             }),
             buildKeyValueField({
               label: 'Kennitala maka',
               width: 'half',
-              value: (app) => (app.answers.person as any)?.partnerNationalId
+              value: (app) => (app.answers.person as any)?.partnerNationalId,
             }),
             buildKeyValueField({
               label: 'Kennitala barns',
               width: 'half',
-              value: (app) => (app.answers.person as any)?.childrenNationalId
+              value: ({ externalData }: any) =>
+                (externalData?.nationalRegistry
+                  .data as NationalRegistryGetPerson).childrenNationalId[0],
+            }),
+            buildKeyValueField({
+              label: 'Kennitala barns',
+              width: 'half',
+              value: ({ externalData }: any) =>
+                (externalData?.nationalRegistry
+                  .data as NationalRegistryGetPerson).childrenNationalId[1],
             }),
             buildDividerField({}),
             buildKeyValueField({
               label: 'Má eiga rafræn samskipti við þig?',
               width: 'half',
-              value: (app) => (app.answers as any)?.getPaperCopy === 'yes' ? m.yesOptionLabel : m.noOptionLabel 
+              value: (app) =>
+                (app.answers as any)?.getPaperCopy === 'yes'
+                  ? m.yesOptionLabel
+                  : m.noOptionLabel,
             }),
             buildKeyValueField({
               label: 'Leyniorð',
               width: 'half',
-              value: (app) => (app.answers as any)?.secretWord
+              value: (app) => (app.answers as any)?.secretWord,
             }),
             buildDividerField({}),
-            
+            buildKeyValueField({
+              label: m.paymentInformationBank,
+              value: (app) => (app.answers.payments as any)?.bank,
+            }),
+            buildKeyValueField({
+              label: m.pensionFund,
+              width: 'half',
+              value: (app) => (app.answers.payments as any)?.pensionFund,
+            }),
+            buildKeyValueField({
+              label: 'Lífeyrissjóður hlutfall',
+              width: 'half',
+              value: (app) =>
+                (app.answers.payments as any)?.pensionFundPercentage + '%',
+            }),
+            buildKeyValueField({
+              label: 'Stéttarfélag',
+              width: 'half',
+              value: (app) => (app.answers.payments as any)?.union,
+            }),
+            buildKeyValueField({
+              label: 'Stéttarfélag hlutfall',
+              width: 'half',
+              value: (app) =>
+                (app.answers.payments as any)?.unionPercentage + '%',
+            }),
+            buildKeyValueField({
+              label: 'Viðbótarlífyerissjóður',
+              width: 'half',
+              value: (app) => (app.answers.payments as any)?.privatePensionFund,
+            }),
+
+            buildKeyValueField({
+              label: 'Viðbótarlífeyrissjóður hlutfall',
+              width: 'half',
+              value: (app) =>
+                (app.answers.payments as any)?.privatePensionFundPercentage +
+                '%',
+            }),
+            buildDividerField({}),
+            buildKeyValueField({
+              label: 'Hlutfall persónuafsláttar',
+              width: 'half',
+              value: (app) => (app.answers as any)?.personalTaxCreditRatio,
+            }),
+            buildKeyValueField({
+              label: 'Persónuafsláttur 2021',
+              width: 'half',
+              value: (app) =>
+                (app.answers as any)?.personalTaxCreditMonthlyAmount,
+            }),
+            buildKeyValueField({
+              label: 'Tekjur á mánuði',
+              width: 'half',
+              value: (app) => (app.answers as any)?.monthlyIncome,
+            }),
+            buildKeyValueField({
+              label: 'Elli- eða örorkulífeyrisgreiðslur frá Tryggingastofnun',
+              width: 'half',
+              value: (app) =>
+                (app.answers as any)?.insurancePayments ?? 'Engar',
+            }),
+            buildKeyValueField({
+              label:
+                'Elli- og örorkulífeyrisgreiðslur úr almennum lífeyrissjóðum',
+              width: 'half',
+              value: (app) => (app.answers as any)?.pensionPayments ?? 'Engar',
+            }),
+            buildKeyValueField({
+              label: 'Tekjuskattur þrep 1',
+              width: 'half',
+              value: (app) => (app.answers as any)?.incomeStepOne,
+            }),
+            buildKeyValueField({
+              label: 'Tekjuskattur þrep 2',
+              width: 'half',
+              value: (app) => (app.answers as any)?.incomeStepTwo,
+            }),
+            buildKeyValueField({
+              label: 'Ertu í fæðingarorlofi?',
+              width: 'half',
+              value: (app) =>
+                (app.answers as any)?.onParentalLeave === 'yes'
+                  ? m.yesOptionLabel
+                  : m.noOptionLabel,
+            }),
+            buildDividerField({}),
+            buildKeyValueField({
+              label: 'Aðstæður umsækjanda',
+              width: 'half',
+              value: (app) => (app.answers.employment as any)?.employmentStatus,
+            }),
+            buildKeyValueField({
+              label: 'Starfshlutfall',
+              width: 'half',
+              value: (app) => (app.answers.employment as any)?.employmentRatio + '%',
+            }),
+            buildKeyValueField({
+              label: 'Nafn vinnuveitenda',
+              width: 'half',
+              value: (app) => (app.answers.employment as any)?.employerName,
+            }),
+            buildKeyValueField({
+              label: 'Netfang vinnuveitenda',
+              width: 'half',
+              value: (app) => (app.answers.employment as any)?.employerEmail,
+            }),
+            buildKeyValueField({
+              label: 'Hóf störf',
+              width: 'half',
+              value: (app) => (app.answers.employment as any)?.startDate,
+            }),
+            buildKeyValueField({
+              label: 'Lauk störfum',
+              width: 'half',
+              value: (app) => (app.answers.employment as any)?.endDate,
+            }),
           ],
         }),
         buildDescriptionField({
