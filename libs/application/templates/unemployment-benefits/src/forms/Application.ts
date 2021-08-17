@@ -161,12 +161,6 @@ export const application: Form = buildForm({
               id: 'paymentscard',
               children: [
                 buildTextField({
-                  title: m.paymentInformationBank,
-                  id: 'payments.bank',
-                  format: '####-##-######',
-                  placeholder: '0000-00-000000',
-                }),
-                buildTextField({
                   title: 'Mánaðarlegar tekjur',
                   id: 'monthlyIncome',
                 }),
@@ -228,9 +222,15 @@ export const application: Form = buildForm({
           title: 'Sjóðir og félög',
           children:[
             buildMultiField({
-              title: m.paymentInformationName,
+              title: 'Sjóðir og félög',
               id: 'paymentsfunds',
               children: [
+                buildTextField({
+                  title: m.paymentInformationBank,
+                  id: 'payments.bank',
+                  format: '####-##-######',
+                  placeholder: '0000-00-000000',
+                }),
                 buildSelectField({
                   id: 'payments.pensionFund',
                   title: m.pensionFund,
@@ -238,6 +238,7 @@ export const application: Form = buildForm({
                     { label: 'Frjálsi', value: 'Frjalsi' },
                     { label: 'Brú', value: 'bru' },
                   ],
+                  width: 'half'
                 }),
                 buildSelectField({
                   id: 'payments.pensionFundPercentage',
@@ -246,14 +247,16 @@ export const application: Form = buildForm({
                     { label: '2%', value: '2' },
                     { label: '4%', value: '4' },
                   ],
+                  width: 'half'
                 }),
                 buildSelectField({
                   id: 'payments.privatePensionFund',
-                  title: 'Stéttarfélag',
+                  title: 'Viðbótarlífyerissjóður',
                   options: [
                     { label: 'VR', value: 'VR' },
                     { label: 'Efling', value: 'Efling' },
                   ],
+                  width: 'half'
                 }),
                 buildSelectField({
                   id: 'payments.privatePensionFundPercentage',
@@ -262,6 +265,7 @@ export const application: Form = buildForm({
                     { label: '0%', value: '0' },
                     { label: '1%', value: '1' },
                   ],
+                  width: 'half'
                 }),
                 buildSelectField({
                   id: 'payments.union',
@@ -270,6 +274,7 @@ export const application: Form = buildForm({
                     { label: 'VR', value: 'VR' },
                     { label: 'Efling', value: 'Efling' },
                   ],
+                  width: 'half'
                 }),
                 buildSelectField({
                   id: 'payments.unionPercentage',
@@ -278,6 +283,7 @@ export const application: Form = buildForm({
                     { label: '0%', value: '0' },
                     { label: '2%', value: '2' },
                   ],
+                  width: 'half'
                 }),
               ],
             }),
