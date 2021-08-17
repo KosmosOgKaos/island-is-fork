@@ -123,10 +123,10 @@ export class SharedTemplateApiService {
     return this.emailService.sendEmail(template)
   }
 
-  async makeGraphqlQuery(
+  async makeGraphqlQuery<T>(
     authorization: string,
     query: string,
-    variables?: Record<string, any>,
+    variables?: T & Record<string, any>,
   ): Promise<Response> {
     const baseApiUrl = getConfigValue(
       this.configService,
