@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  sut:
+    build:
+      context: .
+      dockerfile: ../../../scripts/ci/Dockerfile.test
+      args:
+        DB_NAME: directorate_of_labor
+        APP: directorate-of-labor
+    networks:
+      - local
+    depends_on:
+      - directorate_of_labor
+    environment:
+      - TEST_DB_USER=test_db
+      - TEST_DB_PASS=test_db
+      - TEST_DB_NAME=test_db
+      - DB_HOST=directorate_of_labor
+    volumes:
+      - ../../..:/code
+
+  directorate_of_labor:
+    ports: []
