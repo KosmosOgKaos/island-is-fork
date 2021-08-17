@@ -52,7 +52,7 @@ export class Person extends Model<Person> {
     type: DataType.STRING,
     allowNull: true,
   })
-  partner_id!: string
+  partnerId!: string
 
   @ApiProperty()
   @CreatedAt
