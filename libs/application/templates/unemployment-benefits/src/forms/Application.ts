@@ -19,6 +19,8 @@ import {
   buildCustomField,
   buildSelectField,
   buildDateField,
+  buildKeyValueField,
+  buildDividerField,
 } from '@island.is/application/core'
 import { ApiActions } from '../shared'
 import { m } from '../lib/messages'
@@ -366,10 +368,54 @@ export const application: Form = buildForm({
             }),
             buildDescriptionField({
               id: 'overview',
-              title: 'Takk fyrir að sækja um',
+              title: 'Takk fyrir að sækja um atvinnuleysisbætur',
               description:
-                'Með því að smella á "Senda" hér að neðan, þá sendist umsóknin inn til úrvinnslu. Við látum þig vita þegar hún er samþykkt eða henni er hafnað.',
+                'Vinsamlegast athugaðu hvort allar upplýsingar séu rétt skráðar. Með því að smella á "Senda" hér að neðan, þá sendist umsóknin inn til úrvinnslu. Við látum þig vita þegar hún er samþykkt eða henni er hafnað.',
             }),
+            buildDividerField({}),
+            buildKeyValueField({
+              label: 'Nafn',
+              width: 'half',
+              value: (app) => (app.answers.person as any)?.name
+            }),
+            buildKeyValueField({
+              label: 'Kennitala',
+              width: 'half',
+              value: (app) => (app.answers.person as any)?.nationalId
+            }),
+            buildKeyValueField({
+              label: 'Netfang',
+              width: 'half',
+              value: (app) => (app.answers.person as any)?.email
+            }),
+            buildKeyValueField({
+              label: 'Heimilisfang',
+              width: 'half',
+              value: (app) => (app.answers.person as any)?.address
+            }),
+            buildKeyValueField({
+              label: 'Kennitala maka',
+              width: 'half',
+              value: (app) => (app.answers.person as any)?.partnerNationalId
+            }),
+            buildKeyValueField({
+              label: 'Kennitala barns',
+              width: 'half',
+              value: (app) => (app.answers.person as any)?.childrenNationalId
+            }),
+            buildDividerField({}),
+            buildKeyValueField({
+              label: 'Má eiga rafræn samskipti við þig?',
+              width: 'half',
+              value: (app) => (app.answers as any)?.getPaperCopy === 'yes' ? m.yesOptionLabel : m.noOptionLabel 
+            }),
+            buildKeyValueField({
+              label: 'Leyniorð',
+              width: 'half',
+              value: (app) => (app.answers as any)?.secretWord
+            }),
+            buildDividerField({}),
+            
           ],
         }),
         buildDescriptionField({
