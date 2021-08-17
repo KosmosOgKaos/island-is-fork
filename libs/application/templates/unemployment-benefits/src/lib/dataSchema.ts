@@ -7,7 +7,7 @@ export const DataSchema = z.object({
   approveExternalData: z.boolean().refine((v) => v),
   person: z.object({
     name: z.string().nonempty().max(256),
-    nationalId: z.string().refine((n) => n && !kennitala.isValid(n), {
+    nationalId: z.string().refine((n) => n && kennitala.isValid(n), {
       params: m.dataSchemeNationalId,
     }),
     phoneNumber: z.string().refine(
@@ -19,10 +19,10 @@ export const DataSchema = z.object({
     ),
     email: z.string().email(),
     address: z.string().nonempty().max(256),
-    partnerNationalId: z.string().refine((n) => n && !kennitala.isValid(n), {
+    partnerNationalId: z.string().refine((n) => n && kennitala.isValid(n), {
       params: m.dataSchemeNationalId,
     }),
-    childrenNationalId: z.string().refine((n) => n && !kennitala.isValid(n), {
+    childrenNationalId: z.string().refine((n) => n && kennitala.isValid(n), {
       params: m.dataSchemeNationalId,
     }),
   }),
