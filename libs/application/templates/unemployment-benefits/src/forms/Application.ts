@@ -17,22 +17,10 @@ import {
   FormValue,
   buildFileUploadField,
   buildCustomField,
-  buildSelectField
+  buildSelectField,
 } from '@island.is/application/core'
 import { ApiActions } from '../shared'
 import { m } from '../lib/messages'
-import get from 'lodash/get'
-
-type SampleProviderData = {
-  nationalId: String
-  fullName: String
-  address: String
-  email: String
-  phone: String
-  children: String
-  partner: string
-  value: string
-}
 
 export const application: Form = buildForm({
   id: 'ExampleFormDraft',
@@ -140,13 +128,17 @@ export const application: Form = buildForm({
                   width: 'half',
                 }),
                 buildRadioField({
-                  id: 'ecommunication',
+                  id: 'getPaperCopy',
                   title: '',
                   options: [
                     {
                       value: 'yes',
                       label:
                         'Ég óska eftir að ákvarðanir og önnur bréf frá Vinnumálastofnun séu send mér með hefðbundnum bréfpósti.',
+                    },
+                    {
+                      value: 'no',
+                      label: 'Ég óska eftir rafrænum samskiptum',
                     },
                   ],
                 }),
@@ -160,112 +152,136 @@ export const application: Form = buildForm({
       id: 'payments',
       title: 'Fjármálaupplýsingar',
       children: [
-          buildMultiField({
-            title: m.paymentInformationName,
-            id: 'paymentscard',
-            children: [
-              buildTextField({
-                title:
-                  m.paymentInformationBank,
-                id: 'payments.bank',
-                format: '####-##-######',
-                placeholder: '0000-00-000000',
-              }),
-            buildSelectField({
-              id: 'payments.pensionFund',
-              title:
-                m.pensionFund,
-              options: [
-                { label: 'Frjálsi', value: 'Frjalsi' },
-                { label: 'Brú', value: 'bru' },
-              ],
-            }),
-            buildSelectField({
-              id: 'payments.pensionFundPercentage',
-              title:
-                'Lífeyrissjóður hlutfall',
-              options: [
-                { label: '2%', value: '2' },
-                { label: '4%', value: '4' },
-              ],
-            }),
-            buildSelectField({
-              id: 'payments.union',
-              title:
-                'Stéttarfélag',
-              options: [
-                { label: 'VR', value: 'VR' },
-                { label: 'Efling', value: 'Efling' },
-              ],
-            }),
-            buildSelectField({
-              id: 'payments.pensionFundPercentage',
-              title:
-                'Lífeyrissjóður hlutfall',
-              options: [
-                { label: '0%', value: '0' },
-                { label: '1%', value: '1' },
-              ],
-            }),
-            buildSelectField({
-              id: 'payments.union',
-              title:
-                'Stéttarfélag',
-              options: [
-                { label: 'VR', value: 'VR' },
-                { label: 'Efling', value: 'Efling' },
-              ],
-            }),
-            buildSelectField({
-              id: 'payments.unionPercentage',
-              title:
-                'Stéttarfélag hlutfall',
-              options: [
-                { label: '0%', value: '0' },
-                { label: '2%', value: '2' },
-              ],
-            }),
-          ],
-        }),
-      ]
-    }),
-
-    buildSection({
-      id: 'career',
-      title: 'Fjármálaupplýsingar',
-      children: [
         buildSubSection({
-          id: 'history',
-          title: m.history,
-          children: [
-            buildRadioField({
-              id: 'careerHistory',
-              title: m.careerHistory,
-              options: [
-                { value: 'yes', label: m.yesOptionLabel },
-                { value: 'no', label: m.noOptionLabel },
+          id: 'paymentsinfo',
+          title: 'Greiðslu upplýsingar',
+          children:[
+            buildMultiField({
+              title: m.paymentInformationName,
+              id: 'paymentscard',
+              children: [
+                buildTextField({
+                  title: m.paymentInformationBank,
+                  id: 'payments.bank',
+                  format: '####-##-######',
+                  placeholder: '0000-00-000000',
+                }),
+                buildTextField({
+                  title: 'Mánaðarlegar tekjur',
+                  id: 'monthlyIncome',
+                }),
+                buildTextField({
+                  id: 'personalTaxCreditRatio',
+                  title: 'Nýting persónuafslátts',
+                  format: '###%',
+                }),
+                buildTextField({
+                  id: 'personalTaxCreditMonthlyAmount',
+                  title: 'Persónuafsláttur 2021',
+                  format: '##.###',
+                  defaultValue: '50792',
+                  disabled: true
+                }),
+                buildTextField({
+                  id: 'incomeStepOne',
+                  title: 'Tekjuskattur þrep 1',
+                  defaultValue: '0.3145',
+                  disabled: true,
+                  width: 'half'
+                }),
+                buildTextField({
+                  id: 'incomeStepTwo',
+                  title: 'Tekjuskattur þrep 2',
+                  defaultValue: '0.3795',
+                  disabled: true,
+                  width: 'half'
+                }),
+                buildTextField({
+                  id: 'insurancePayments',
+                  title: 'Elli- eða örorkulífeyrisgreiðslur frá Tryggingastofnun',
+                }),
+                buildTextField({
+                  id: 'pensionPayments',
+                  title: 'Elli- og örorkulífeyrisgreiðslur úr almennum lífeyrissjóðum',
+                }),
+                buildRadioField({
+                  id: 'onParentalLeave',
+                  title: 'Ertu í fæðingarorlofi?',
+                  largeButtons: false,
+                  options: [
+                    {
+                      value: 'yes',
+                      label: m.yesOptionLabel,
+                    },
+                    {
+                      value: 'no',
+                      label: m.noOptionLabel,
+                    },
+                  ],
+                }),
               ],
             }),
-            buildCheckboxField({
-              id: 'careerHistoryCompanies',
-              title: m.careerHistoryCompanies,
-              options: [
-                { value: 'government', label: m.governmentOptionLabel },
-                { value: 'aranja', label: 'Aranja' },
-                { value: 'advania', label: 'Advania' },
-              ],
-            }),
-          ],
+          ]
         }),
         buildSubSection({
-          id: 'future',
-          title: m.future,
-          children: [
-            buildTextField({
-              id: 'dreamJob',
-              title: m.dreamJob,
+          id: 'paymentsinfofunds',
+          title: 'Sjóðir og félög',
+          children:[
+            buildMultiField({
+              title: m.paymentInformationName,
+              id: 'paymentsfunds',
+              children: [
+                buildSelectField({
+                  id: 'payments.pensionFund',
+                  title: m.pensionFund,
+                  options: [
+                    { label: 'Frjálsi', value: 'Frjalsi' },
+                    { label: 'Brú', value: 'bru' },
+                  ],
+                }),
+                buildSelectField({
+                  id: 'payments.pensionFundPercentage',
+                  title: 'Lífeyrissjóður hlutfall',
+                  options: [
+                    { label: '2%', value: '2' },
+                    { label: '4%', value: '4' },
+                  ],
+                }),
+                buildSelectField({
+                  id: 'payments.privatePensionFund',
+                  title: 'Stéttarfélag',
+                  options: [
+                    { label: 'VR', value: 'VR' },
+                    { label: 'Efling', value: 'Efling' },
+                  ],
+                }),
+                buildSelectField({
+                  id: 'payments.privatePensionFundPercentage',
+                  title: 'Lífeyrissjóður hlutfall',
+                  options: [
+                    { label: '0%', value: '0' },
+                    { label: '1%', value: '1' },
+                  ],
+                }),
+                buildSelectField({
+                  id: 'payments.union',
+                  title: 'Stéttarfélag',
+                  options: [
+                    { label: 'VR', value: 'VR' },
+                    { label: 'Efling', value: 'Efling' },
+                  ],
+                }),
+                buildSelectField({
+                  id: 'payments.unionPercentage',
+                  title: 'Stéttarfélag hlutfall',
+                  options: [
+                    { label: '0%', value: '0' },
+                    { label: '2%', value: '2' },
+                  ],
+                }),
+              ],
             }),
-          ],
+          ]
         }),
       ],
     }),
