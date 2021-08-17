@@ -3,7 +3,7 @@ import { ApiOkResponse } from '@nestjs/swagger'
 import { Person } from '../models/person.model'
 import { NationalRegistryService } from '../nationalRegistry.service'
 
-@Controller('people/:nationalId/children')
+@Controller('v1/people/:nationalId/children')
 export class ChildrenController {
   constructor(
     private readonly nationalRegistryService: NationalRegistryService,

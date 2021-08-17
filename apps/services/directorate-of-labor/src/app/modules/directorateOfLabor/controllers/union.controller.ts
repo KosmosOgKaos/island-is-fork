@@ -3,7 +3,7 @@ import { Controller, Get } from '@nestjs/common'
 import { DirectorateOfLaborService } from '../directorateOfLabor.service'
 import { Union } from '../models/union.model'
 
-@Controller('unions')
+@Controller('v1/unions')
 export class UnionController {
   constructor(
     private readonly directorateOfLaborService: DirectorateOfLaborService,
