@@ -17,8 +17,6 @@ export interface UnemploymentBenefitsSchema {
   }
   secretWord?: string
   getPaperCopy: 'yes' | 'no'
-  employmentStatus?: string
-  employmentRatio?: string
   payments: {
     bank: string
     pensionFund?: string
@@ -30,12 +28,20 @@ export interface UnemploymentBenefitsSchema {
   }
   personalTaxCreditRatio?: string
   personalTaxCreditMonthlyAmount: string
-  monthlyIncome: string
-  insurancePayments: string
-  pensionPayments: string
+  monthlyIncome?: string
+  insurancePayments?: string
+  pensionPayments?: string
   incomeStepOne?: string
   incomeStepTwo?: string
   onParentalLeave: 'yes' | 'no'
+  employment?: {
+    employmentStatus: string
+    employmentRatio: string
+    employerEmail?: string
+    employerName?: string
+    startDate?: string
+    endDate?: string
+  }
 }
 
 export const DataSchema = z.object({
@@ -94,11 +100,10 @@ export const DataSchema = z.object({
     .optional(),
   onParentalLeave: z.enum(['yes', 'no']),
   employment: z.object ({
-    employmentStatus: z.string().optional(),
+    employmentStatus: z.string(),
     employmentRatio: z
       .string()
-      .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100)
-      .optional(),
+      .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100),
     employerEmail: z.string().email(),
     employerName: z.string(),
     startDate: z.string(),
