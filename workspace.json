@@ -7484,33 +7484,33 @@
         "docker-express": {}
       }
     },
-    "services-unemployment-benefits": {
-      "root": "apps/services/unemployment-benefits",
-      "sourceRoot": "apps/services/unemployment-benefits/src",
+    "services-directorate-of-labor": {
+      "root": "apps/services/directorate-of-labor",
+      "sourceRoot": "apps/services/directorate-of-labor/src",
       "projectType": "application",
-      "prefix": "services-unemployment-benefits",
+      "prefix": "services-directorate-of-labor",
       "architect": {
         "build": {
           "builder": "@irdnis/esbuildnx:build",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/apps/services/unemployment-benefits",
-            "main": "apps/services/unemployment-benefits/src/main.ts",
-            "tsConfig": "apps/services/unemployment-benefits/tsconfig.app.json",
+            "outputPath": "dist/apps/services/directorate-of-labor",
+            "main": "apps/services/directorate-of-labor/src/main.ts",
+            "tsConfig": "apps/services/directorate-of-labor/tsconfig.app.json",
             "assets": [
               {
                 "glob": "*",
-                "input": "apps/services/unemployment-benefits/migrations",
+                "input": "apps/services/directorate-of-labor/migrations",
                 "output": "./migrations"
               },
               {
                 "glob": ".sequelizerc",
-                "input": "apps/services/unemployment-benefits",
+                "input": "apps/services/directorate-of-labor",
                 "output": "./"
               },
               {
                 "glob": "sequelize.config.js",
-                "input": "apps/services/unemployment-benefits",
+                "input": "apps/services/directorate-of-labor",
                 "output": "./"
               }
             ]
@@ -7526,22 +7526,22 @@
         "serve": {
           "builder": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "services-unemployment-benefits:build"
+            "buildTarget": "services-directorate-of-labor:build"
           }
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "apps/services/unemployment-benefits/**/*.ts"
+              "apps/services/directorate-of-labor/**/*.ts"
             ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/services/unemployment-benefits"],
+          "outputs": ["coverage/apps/services/directorate-of-labor"],
           "options": {
-            "jestConfig": "apps/services/unemployment-benefits/jest.config.js",
+            "jestConfig": "apps/services/directorate-of-labor/jest.config.js",
             "passWithNoTests": true
           }
         },
@@ -7549,49 +7549,162 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "command": "docker-compose -f docker-compose.base.yml -f docker-compose.dev.yml up -d --build",
-            "cwd": "apps/services/unemployment-benefits"
+            "cwd": "apps/services/directorate-of-labor"
           }
         },
         "schemas/build-openapi": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "outputPath": "apps/services/unemployment-benefits/src/openapi.yaml",
-            "command": "yarn ts-node -P apps/services/unemployment-benefits/tsconfig.app.json apps/services/unemployment-benefits/src/buildOpenApi.ts"
+            "outputPath": "apps/services/directorate-of-labor/src/openapi.yaml",
+            "command": "yarn ts-node -P apps/services/directorate-of-labor/tsconfig.app.json apps/services/directorate-of-labor/src/buildOpenApi.ts"
           }
         },
         "migrate": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "command": "../../../node_modules/.bin/sequelize-cli db:migrate",
-            "cwd": "apps/services/unemployment-benefits"
+            "cwd": "apps/services/directorate-of-labor"
           }
         },
         "migrate/undo": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "command": "../../../node_modules/.bin/sequelize-cli db:migrate:undo",
-            "cwd": "apps/services/unemployment-benefits"
+            "cwd": "apps/services/directorate-of-labor"
           }
         },
         "seed": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "command": "../../../node_modules/.bin/sequelize-cli db:seed",
-            "cwd": "apps/services/unemployment-benefits"
+            "cwd": "apps/services/directorate-of-labor"
           }
         },
         "seed/undo": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "command": "../../../node_modules/.bin/sequelize-cli db:seed:undo",
-            "cwd": "apps/services/unemployment-benefits"
+            "cwd": "apps/services/directorate-of-labor"
           }
         },
         "migrate/generate": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "command": "../../../node_modules/.bin/sequelize-cli migration:generate --name $(whoami)",
-            "cwd": "apps/services/unemployment-benefits"
+            "cwd": "apps/services/directorate-of-labor"
+          }
+        },
+        "docker-express": {}
+      }
+    },
+    "services-national-registry": {
+      "root": "apps/services/national-registry",
+      "sourceRoot": "apps/services/national-registry/src",
+      "projectType": "application",
+      "prefix": "services-national-registry",
+      "architect": {
+        "build": {
+          "builder": "@irdnis/esbuildnx:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/services/national-registry",
+            "main": "apps/services/national-registry/src/main.ts",
+            "tsConfig": "apps/services/national-registry/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "*",
+                "input": "apps/services/national-registry/migrations",
+                "output": "./migrations"
+              },
+              {
+                "glob": ".sequelizerc",
+                "input": "apps/services/national-registry",
+                "output": "./"
+              },
+              {
+                "glob": "sequelize.config.js",
+                "input": "apps/services/national-registry",
+                "output": "./"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "services-national-registry:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/services/national-registry/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/services/national-registry"],
+          "options": {
+            "jestConfig": "apps/services/national-registry/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "dev-services": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "docker-compose -f docker-compose.base.yml -f docker-compose.dev.yml up -d --build",
+            "cwd": "apps/services/national-registry"
+          }
+        },
+        "schemas/build-openapi": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "outputPath": "apps/services/national-registry/src/openapi.yaml",
+            "command": "yarn ts-node -P apps/services/national-registry/tsconfig.app.json apps/services/national-registry/src/buildOpenApi.ts"
+          }
+        },
+        "migrate": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "../../../node_modules/.bin/sequelize-cli db:migrate",
+            "cwd": "apps/services/national-registry"
+          }
+        },
+        "migrate/undo": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "../../../node_modules/.bin/sequelize-cli db:migrate:undo",
+            "cwd": "apps/services/national-registry"
+          }
+        },
+        "seed": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "../../../node_modules/.bin/sequelize-cli db:seed",
+            "cwd": "apps/services/national-registry"
+          }
+        },
+        "seed/undo": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "../../../node_modules/.bin/sequelize-cli db:seed:undo",
+            "cwd": "apps/services/national-registry"
+          }
+        },
+        "migrate/generate": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "../../../node_modules/.bin/sequelize-cli migration:generate --name $(whoami)",
+            "cwd": "apps/services/national-registry"
           }
         },
         "docker-express": {}

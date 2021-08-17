@@ -651,7 +651,10 @@
     "services-party-letter-registry-api": {
       "tags": []
     },
-    "services-unemployment-benefits": {
+    "services-directorate-of-labor": {
+      "tags": []
+    },
+    "services-national-registry": {
       "tags": []
     },
     "services-search-indexer": {
