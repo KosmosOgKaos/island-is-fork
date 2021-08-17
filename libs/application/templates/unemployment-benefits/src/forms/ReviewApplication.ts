@@ -39,12 +39,6 @@ export const ReviewApplication: Form = buildForm({
               width: 'half',
             }),
             buildTextField({
-              id: 'person.age',
-              title: m.age,
-              disabled: true,
-              width: 'half',
-            }),
-            buildTextField({
               id: 'person.email',
               title: m.email,
               disabled: true,
@@ -55,33 +49,6 @@ export const ReviewApplication: Form = buildForm({
               title: m.phoneNumber,
               disabled: true,
               width: 'half',
-            }),
-            buildDividerField({ title: 'Atvinna' }),
-            buildRadioField({
-              id: 'careerHistory',
-              title: m.careerHistory,
-              width: 'half',
-              disabled: true,
-              options: [
-                { value: 'yes', label: m.yesOptionLabel },
-                { value: 'no', label: m.noOptionLabel },
-              ],
-            }),
-            buildCheckboxField({
-              id: 'careerHistoryCompanies',
-              title: m.careerHistoryCompanies,
-              disabled: true,
-              width: 'half',
-              options: [
-                { value: 'government', label: m.governmentOptionLabel },
-                { value: 'aranja', label: 'Aranja' },
-                { value: 'advania', label: 'Advania' },
-              ],
-            }),
-            buildTextField({
-              id: 'dreamJob',
-              title: m.dreamJob,
-              disabled: true,
             }),
             buildSubmitField({
               id: 'approvedByReviewer',

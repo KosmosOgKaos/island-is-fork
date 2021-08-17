@@ -9,9 +9,7 @@ import {
   DefaultStateLifeCycle,
   ApplicationConfigurations,
 } from '@island.is/application/core'
-import * as z from 'zod'
-import * as kennitala from 'kennitala'
-import { parsePhoneNumberFromString } from 'libphonenumber-js'
+import { DataSchema } from './dataSchema'
 
 import { ApiActions } from '../shared'
 import { m } from './messages'
@@ -34,45 +32,6 @@ enum Roles {
   APPLICANT = 'applicant',
   ASSIGNEE = 'assignee',
 }
-const DataSchema = z.object({
-  approveExternalData: z.boolean().refine((v) => v),
-  person: z.object({
-    name: z.string().nonempty().max(256),
-    age: z.string().refine((x) => {
-      const asNumber = parseInt(x)
-      if (isNaN(asNumber)) {
-        return false
-      }
-      return asNumber > 15
-    }),
-    nationalId: z
-      .string()
-      /**
-       * We are depending on this template for the e2e tests on the application-system-api.
-       * Because we are not allowing committing valid kennitala, I reversed the condition
-       * to check for invalid kenitala so it passes the test.
-       */
-      .refine((n) => n && !kennitala.isValid(n), {
-        params: m.dataSchemeNationalId,
-      }),
-    phoneNumber: z.string().refine(
-      (p) => {
-        const phoneNumber = parsePhoneNumberFromString(p, 'IS')
-        return phoneNumber && phoneNumber.isValid()
-      },
-      { params: m.dataSchemePhoneNumber },
-    ),
-    email: z.string().email(),
-  }),
-  careerHistory: z.enum(['yes', 'no']).optional(),
-  careerHistoryCompanies: z
-    .array(
-      // TODO checkbox answers are [undefined, 'aranja', undefined] and we need to do something about it...
-      z.union([z.enum(['government', 'aranja', 'advania']), z.undefined()]),
-    )
-    .nonempty(),
-  dreamJob: z.string().optional(),
-})
 
 const UnemploymentBenefitsTemplate: ApplicationTemplate<
   ApplicationContext,
@@ -81,8 +40,10 @@ const UnemploymentBenefitsTemplate: ApplicationTemplate<
 > = {
   type: ApplicationTypes.UNEMPLOYMENT_BENEFITS,
   name: m.name,
-  institution: m.institutionName,
-  translationNamespaces: [ApplicationConfigurations.UnemploymentBenefits.translation],
+  institution: 'Umsókn um atvinnuleysisbætur',
+  translationNamespaces: [
+    ApplicationConfigurations.UnemploymentBenefits.translation,
+  ],
   dataSchema: DataSchema,
   stateMachineConfig: {
     initial: States.draft,
@@ -90,10 +51,10 @@ const UnemploymentBenefitsTemplate: ApplicationTemplate<
       [States.draft]: {
         meta: {
           name: 'Umsókn fyrir atvinnuleysisbætur',
-          // actionCard: {
-          //   title: m.draftTitle,
-          //   description: m.draftDescription,
-          // },
+          actionCard: {
+            title: m.draftTitle,
+            description: m.draftDescription,
+          },
           progress: 0.25,
           lifecycle: DefaultStateLifeCycle,
           roles: [
@@ -104,7 +65,7 @@ const UnemploymentBenefitsTemplate: ApplicationTemplate<
                   Promise.resolve(module.application),
                 ),
               actions: [
-                { event: 'SUBMIT', name: 'Staðfesta', type: 'primary' },
+                { event: 'SUBMIT' , name: 'Staðfesta', type: 'primary' },
               ],
               write: 'all',
             },
@@ -118,15 +79,15 @@ const UnemploymentBenefitsTemplate: ApplicationTemplate<
       },
       [States.inReview]: {
         meta: {
-          name: 'In Review',
+          name: 'Employer Review',
           progress: 0.75,
           lifecycle: DefaultStateLifeCycle,
-          onEntry: {
-            apiModuleAction: ApiActions.createApplication,
-          },
-          onExit: {
-            apiModuleAction: ApiActions.completeApplication,
-          },
+          // onEntry: {
+          //   apiModuleAction: ApiActions.createApplication,
+          // },
+          // onExit: {
+          //   apiModuleAction: ApiActions.completeApplication,
+          // },
           roles: [
             {
               id: Roles.ASSIGNEE,
@@ -138,7 +99,7 @@ const UnemploymentBenefitsTemplate: ApplicationTemplate<
                 { event: 'APPROVE', name: 'Samþykkja', type: 'primary' },
                 { event: 'REJECT', name: 'Hafna', type: 'reject' },
               ],
-              write: { answers: ['careerHistoryCompanies'] },
+              write: 'all',
               read: 'all',
             },
             {
