@@ -28,7 +28,7 @@ export const DataSchema = z.object({
   }),
   secretWord: z.string().optional(),
   getPaperCopy: z.enum(['yes', 'no']),
-  employmentStatus: z.array(z.enum(['Launþegi', 'Sjálfstæð'])).nonempty(),
+  employmentStatus: z.string().optional(),
   employmentRatio: z
     .string()
     .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100)

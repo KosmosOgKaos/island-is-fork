@@ -160,6 +160,21 @@ export const application: Form = buildForm({
               title: m.paymentInformationName,
               id: 'paymentscard',
               children: [
+                buildSelectField({
+                  id: 'employmentStatus',
+                  title: 'Aðstæður umsækjanda',
+                  options: [
+                    { value: 'Launþegi', label: 'Launþegi'},
+                    { value: 'Sjálfstætt starfandi', label: 'Sjálfstætt starfandi'}
+                  ],
+                  width: 'half'
+                }),
+                buildTextField({
+                  title: 'Starfshlutfall',
+                  id: 'employmentRatio',
+                  format: '###%',
+                  width: 'half'
+                }),
                 buildTextField({
                   title: 'Mánaðarlegar tekjur',
                   id: 'monthlyIncome',
@@ -168,13 +183,15 @@ export const application: Form = buildForm({
                   id: 'personalTaxCreditRatio',
                   title: 'Nýting persónuafslátts',
                   format: '###%',
+                  width: 'half'
                 }),
                 buildTextField({
                   id: 'personalTaxCreditMonthlyAmount',
                   title: 'Persónuafsláttur 2021',
                   format: '##.###',
                   defaultValue: '50792',
-                  disabled: true
+                  disabled: true,
+                  width: 'half'
                 }),
                 buildTextField({
                   id: 'incomeStepOne',
