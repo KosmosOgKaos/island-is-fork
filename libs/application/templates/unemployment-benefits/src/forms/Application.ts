@@ -126,7 +126,7 @@ export const application: Form = buildForm({
                   width: 'half',
                   defaultValue: ({ externalData }: any) =>
                     (externalData?.nationalRegistry
-                      .data as NationalRegistryGetPerson).childrenNationalId ?? '010130-7789',
+                      .data as NationalRegistryGetPerson).childrenNationalId[0] ?? '0101307789',
                 }),
               ],
             }),
