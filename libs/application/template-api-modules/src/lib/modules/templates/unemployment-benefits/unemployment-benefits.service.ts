@@ -52,8 +52,8 @@ export class UnemploymentBenefitsService {
             secretWord: unemploymentAnswers.secretWord ?? noResponseText,
             getPaperCopy: unemploymentAnswers.getPaperCopy === 'yes',
             employmentStatus:
-              unemploymentAnswers.employmentStatus ?? noResponseText,
-            employmentRatio: Number(unemploymentAnswers.employmentRatio ?? 0),
+              unemploymentAnswers.employment?.employmentStatus ?? noResponseText,
+            employmentRatio: Number(unemploymentAnswers.employment?.employmentRatio ?? 0),
             bank: unemploymentAnswers.payments.bank,
             pensionFund:
               unemploymentAnswers.payments.pensionFund ?? noResponseText,
