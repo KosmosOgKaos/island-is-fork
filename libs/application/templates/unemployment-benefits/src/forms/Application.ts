@@ -263,8 +263,25 @@ export const application: Form = buildForm({
                   id: 'payments.pensionFund',
                   title: m.pensionFund,
                   options: [
-                    { label: 'Frjálsi', value: 'Frjalsi' },
-                    { label: 'Brú', value: 'bru' },
+                    { label: 'Lífeyrissjóður verzlunarmanna', value: 'ca971a91-0bfc-4987-9b79-47f679f30ad9' },
+                    {
+                      value: '53e0482d-b177-451f-bec3-17b5ec64b1fa',
+                      label: 'Almenni',
+                    },
+                    {
+                      value: '48aea848-227f-4430-bbb5-f28413c38066',
+                      label: 'Birta',
+                    },
+                    { value: 'a9eb3827-8d18-4950-b678-3e1f4906cd2d', label: 'Brú' },
+                    {
+                      value: '187929f8-f439-45a4-acb3-43cff2d834ab',
+                      label: 'Gildi',
+                    },
+                    {
+                      value: '15f22281-7b11-41e1-9f23-c80b49756bee',
+                      label: 'Stapi',
+                    }
+
                   ],
                   width: 'half',
                 }),
@@ -299,8 +316,8 @@ export const application: Form = buildForm({
                   id: 'payments.union',
                   title: 'Stéttarfélag',
                   options: [
-                    { label: 'VR', value: 'VR' },
-                    { label: 'Efling', value: 'Efling' },
+                    { label: 'Verzlunarmannafélag Reykjavíkur (VR)', value: '86553292-4f26-4f79-82eb-9092e830e20f' },
+                    { label: 'Efling', value: 'f5194065-6039-44c9-9e22-c32a807fd84a' },
                   ],
                   width: 'half',
                 }),
@@ -430,13 +447,6 @@ export const application: Form = buildForm({
               value: ({ externalData }: any) =>
                 (externalData?.nationalRegistry
                   .data as NationalRegistryGetPerson).childrenNationalId[0],
-            }),
-            buildKeyValueField({
-              label: 'Kennitala barns',
-              width: 'half',
-              value: ({ externalData }: any) =>
-                (externalData?.nationalRegistry
-                  .data as NationalRegistryGetPerson).childrenNationalId[1],
             }),
             buildDividerField({}),
             buildKeyValueField({
@@ -570,6 +580,12 @@ export const application: Form = buildForm({
               width: 'half',
               value: (app) => (app.answers.employment as any)?.endDate,
             }),
+            buildDividerField({}),
+            buildCustomField({
+              id: 'expected',
+              title: '',
+              component: 'ExpectedBenefits'
+            })
           ],
         }),
         buildDescriptionField({
