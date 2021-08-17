@@ -87,10 +87,13 @@ export class UnemploymentBenefitsService {
       )
     }
 
-    await this.sharedTemplateAPIService.sendEmail(
-      generateApplicationApprovedEmail,
-      application,
-    )
+    // if we have employer email send him a notification
+    if (unemploymentAnswers.employment?.employerEmail) {
+      await this.sharedTemplateAPIService.sendEmail(
+        generateApplicationApprovedEmail,
+        application,
+      )
+    }
 
     return {
       success: true,

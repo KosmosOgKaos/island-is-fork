@@ -59,11 +59,13 @@ export const DataSchema = z.object({
     ),
     email: z.string().email(),
     address: z.string().nonempty().max(256),
-    partnerNationalId: z.string().refine((n) => n && kennitala.isValid(n), {
-      params: m.dataSchemeNationalId,
-    }).optional(),
-    childrenNationalId:
-      z.string().optional(),
+    partnerNationalId: z
+      .string()
+      .refine((n) => !n || kennitala.isValid(n), {
+        params: m.dataSchemeNationalId,
+      })
+      .optional(),
+    childrenNationalId: z.string().optional(),
   }),
   secretWord: z.string().optional(),
   getPaperCopy: z.enum(['yes', 'no']),

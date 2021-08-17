@@ -288,8 +288,14 @@ export const application: Form = buildForm({
                   id: 'payments.privatePensionFund',
                   title: 'Viðbótarlífyerissjóður',
                   options: [
-                    { label: 'VR', value: 'VR' },
-                    { label: 'Efling', value: 'Efling' },
+                    {
+                      label: 'VR',
+                      value: '86553292-4f26-4f79-82eb-9092e830e20f',
+                    },
+                    {
+                      label: 'Efling',
+                      value: '86553292-4f26-4f79-82eb-9092e830e20f',
+                    },
                   ],
                   width: 'half',
                 }),
@@ -344,9 +350,9 @@ export const application: Form = buildForm({
               id: 'employment.employmentStatus',
               title: 'Aðstæður umsækjanda',
               options: [
-                { value: 'Launþegi', label: 'Launþegi' },
+                { value: 'employee', label: 'Launþegi' },
                 {
-                  value: 'Sjálfstætt starfandi',
+                  value: 'independent',
                   label: 'Sjálfstætt starfandi',
                 },
               ],
@@ -363,28 +369,28 @@ export const application: Form = buildForm({
               title: 'Nafn vinnuveitenda',
               width: 'half',
               condition: (answers) =>
-                (answers.employment as any)?.employmentStatus === 'Launþegi',
+                (answers.employment as any)?.employmentStatus === 'employee',
             }),
             buildTextField({
               id: 'employment.employerEmail',
               title: m.email,
               width: 'half',
               condition: (answers) =>
-                (answers.employment as any)?.employmentStatus === 'Launþegi',
+                (answers.employment as any)?.employmentStatus === 'employee',
             }),
             buildDateField({
               id: 'employment.startDate',
               title: 'Störf hafin',
               width: 'half',
               condition: (answers) =>
-                (answers.employment as any)?.employmentStatus === 'Launþegi',
+                (answers.employment as any)?.employmentStatus === 'employee',
             }),
             buildDateField({
               id: 'employment.endDate',
               title: 'Störfum lokið',
               width: 'half',
               condition: (answers) =>
-                (answers.employment as any)?.employmentStatus === 'Launþegi',
+                (answers.employment as any)?.employmentStatus === 'employee',
             }),
           ],
         }),
