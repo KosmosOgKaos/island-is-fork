@@ -40,7 +40,7 @@ const UnemploymentBenefitsTemplate: ApplicationTemplate<
 > = {
   type: ApplicationTypes.UNEMPLOYMENT_BENEFITS,
   name: m.name,
-  institution: m.institutionName,
+  institution: 'Umsókn um atvinnuleysisbætur',
   translationNamespaces: [
     ApplicationConfigurations.UnemploymentBenefits.translation,
   ],
@@ -65,7 +65,7 @@ const UnemploymentBenefitsTemplate: ApplicationTemplate<
                   Promise.resolve(module.application),
                 ),
               actions: [
-                { event: 'SUBMIT', name: 'Staðfesta', type: 'primary' },
+                { event: 'SUBMIT' , name: 'Staðfesta', type: 'primary' },
               ],
               write: 'all',
             },
@@ -99,7 +99,7 @@ const UnemploymentBenefitsTemplate: ApplicationTemplate<
                 { event: 'APPROVE', name: 'Samþykkja', type: 'primary' },
                 { event: 'REJECT', name: 'Hafna', type: 'reject' },
               ],
-              write: { answers: ['careerHistoryCompanies'] },
+              write: 'all',
               read: 'all',
             },
             {
