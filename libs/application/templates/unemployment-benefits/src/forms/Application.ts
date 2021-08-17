@@ -27,25 +27,24 @@ export const application: Form = buildForm({
   title: 'Atvinnuleysisbætur',
   mode: FormModes.APPLYING,
   children: [
-    // buildSection({
-    //   id: 'externalData',
-    //   title: m.conditionsSection,
-    //   children: [
-    //     buildExternalDataProvider({
-    //       id: 'approveExternalData',
-    //       title: 'Utanaðkomandi gögn',
-    //       dataProviders: [
-    //         buildDataProviderItem({
-    //           id: 'sampleData',
-    //           type: 'SampleDataProvider',
-    //           title: 'Staðfesting á ákveðnu atriði',
-    //           subTitle:
-    //             'Sækja þarf gögn frá Þjóðskrá og atvinnumálastofnun',
-    //         }),
-    //       ],
-    //     }),
-    //   ],
-    // }),
+    buildSection({
+      id: 'externalData',
+      title: m.conditionsSection,
+      children: [
+        buildExternalDataProvider({
+          id: 'approveExternalData',
+          title: 'Utanaðkomandi gögn',
+          dataProviders: [
+            buildDataProviderItem({
+              id: 'nationalRegistry',
+              type: 'NationalRegistryDataProvider',
+              title: 'Þjóðskrá',
+              subTitle: 'Þessi umsókn krefst uppfléttingar í þjóðskrá.',
+            }),
+          ],
+        }),
+      ],
+    }),
     buildSection({
       id: 'intro',
       title: m.introSection,
@@ -155,7 +154,7 @@ export const application: Form = buildForm({
         buildSubSection({
           id: 'paymentsinfo',
           title: 'Greiðslu upplýsingar',
-          children:[
+          children: [
             buildMultiField({
               title: m.paymentInformationName,
               id: 'paymentscard',
@@ -164,16 +163,19 @@ export const application: Form = buildForm({
                   id: 'employmentStatus',
                   title: 'Aðstæður umsækjanda',
                   options: [
-                    { value: 'Launþegi', label: 'Launþegi'},
-                    { value: 'Sjálfstætt starfandi', label: 'Sjálfstætt starfandi'}
+                    { value: 'Launþegi', label: 'Launþegi' },
+                    {
+                      value: 'Sjálfstætt starfandi',
+                      label: 'Sjálfstætt starfandi',
+                    },
                   ],
-                  width: 'half'
+                  width: 'half',
                 }),
                 buildTextField({
                   title: 'Starfshlutfall',
                   id: 'employmentRatio',
                   format: '###%',
-                  width: 'half'
+                  width: 'half',
                 }),
                 buildTextField({
                   title: 'Mánaðarlegar tekjur',
@@ -183,7 +185,7 @@ export const application: Form = buildForm({
                   id: 'personalTaxCreditRatio',
                   title: 'Nýting persónuafslátts',
                   format: '###%',
-                  width: 'half'
+                  width: 'half',
                 }),
                 buildTextField({
                   id: 'personalTaxCreditMonthlyAmount',
@@ -191,29 +193,31 @@ export const application: Form = buildForm({
                   format: '##.###',
                   defaultValue: '50792',
                   disabled: true,
-                  width: 'half'
+                  width: 'half',
                 }),
                 buildTextField({
                   id: 'incomeStepOne',
                   title: 'Tekjuskattur þrep 1',
                   defaultValue: '0.3145',
                   disabled: true,
-                  width: 'half'
+                  width: 'half',
                 }),
                 buildTextField({
                   id: 'incomeStepTwo',
                   title: 'Tekjuskattur þrep 2',
                   defaultValue: '0.3795',
                   disabled: true,
-                  width: 'half'
+                  width: 'half',
                 }),
                 buildTextField({
                   id: 'insurancePayments',
-                  title: 'Elli- eða örorkulífeyrisgreiðslur frá Tryggingastofnun',
+                  title:
+                    'Elli- eða örorkulífeyrisgreiðslur frá Tryggingastofnun',
                 }),
                 buildTextField({
                   id: 'pensionPayments',
-                  title: 'Elli- og örorkulífeyrisgreiðslur úr almennum lífeyrissjóðum',
+                  title:
+                    'Elli- og örorkulífeyrisgreiðslur úr almennum lífeyrissjóðum',
                 }),
                 buildRadioField({
                   id: 'onParentalLeave',
@@ -232,12 +236,12 @@ export const application: Form = buildForm({
                 }),
               ],
             }),
-          ]
+          ],
         }),
         buildSubSection({
           id: 'paymentsinfofunds',
           title: 'Sjóðir og félög',
-          children:[
+          children: [
             buildMultiField({
               title: 'Sjóðir og félög',
               id: 'paymentsfunds',
@@ -255,7 +259,7 @@ export const application: Form = buildForm({
                     { label: 'Frjálsi', value: 'Frjalsi' },
                     { label: 'Brú', value: 'bru' },
                   ],
-                  width: 'half'
+                  width: 'half',
                 }),
                 buildSelectField({
                   id: 'payments.pensionFundPercentage',
@@ -264,7 +268,7 @@ export const application: Form = buildForm({
                     { label: '2%', value: '2' },
                     { label: '4%', value: '4' },
                   ],
-                  width: 'half'
+                  width: 'half',
                 }),
                 buildSelectField({
                   id: 'payments.privatePensionFund',
@@ -273,7 +277,7 @@ export const application: Form = buildForm({
                     { label: 'VR', value: 'VR' },
                     { label: 'Efling', value: 'Efling' },
                   ],
-                  width: 'half'
+                  width: 'half',
                 }),
                 buildSelectField({
                   id: 'payments.privatePensionFundPercentage',
@@ -282,7 +286,7 @@ export const application: Form = buildForm({
                     { label: '0%', value: '0' },
                     { label: '1%', value: '1' },
                   ],
-                  width: 'half'
+                  width: 'half',
                 }),
                 buildSelectField({
                   id: 'payments.union',
@@ -291,7 +295,7 @@ export const application: Form = buildForm({
                     { label: 'VR', value: 'VR' },
                     { label: 'Efling', value: 'Efling' },
                   ],
-                  width: 'half'
+                  width: 'half',
                 }),
                 buildSelectField({
                   id: 'payments.unionPercentage',
@@ -300,11 +304,11 @@ export const application: Form = buildForm({
                     { label: '0%', value: '0' },
                     { label: '2%', value: '2' },
                   ],
-                  width: 'half'
+                  width: 'half',
                 }),
               ],
             }),
-          ]
+          ],
         }),
       ],
     }),

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { createClient, EntryCollection, ContentfulClientApi } from 'contentful'
 import { logger } from '@island.is/logging'
 
-const space = '8k0h54kbe6bj'
+const space = process.env.CONTENTFUL_SPACE || '8k0h54kbe6bj'
 const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
