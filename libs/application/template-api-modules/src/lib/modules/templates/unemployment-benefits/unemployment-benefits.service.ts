@@ -1,103 +1,85 @@
 import { LOGGER_PROVIDER } from '@island.is/logging'
 import { Inject, Injectable } from '@nestjs/common'
 import { TemplateApiModuleActionProps } from '../../../types'
-import { GenerateAssignSupremeCourtApplicationEmailOptions } from './emailGenerators'
 import type { Logger } from '@island.is/logging'
 import type { UnemploymentBenefitsSchema } from '@island.is/application/templates/unemployment-benefits'
+import { SharedTemplateApiService } from '../../shared'
+import {
+  MutationUnemploymentSubmitApplicationArgs,
+  SubmitApplicationResponse,
+} from './types/schema'
 
-export const PARTY_APPLICATION_SERVICE_OPTIONS =
-  'PARTY_APPLICATION_SERVICE_OPTIONS'
-
-const CREATE_ENDORSEMENT_LIST_QUERY = `
-  mutation EndorsementSystemCreatePartyLetterEndorsementList($input: CreateEndorsementListDto!) {
-    endorsementSystemCreateEndorsementList(input: $input) {
-      id
-    }
+const SUBMIT_UNEMPLOYMENT_APPLICATION_QUERY = `
+mutation unemploymentSubmitApplication($input: SubmitApplicationDto!) {
+  unemploymentSubmitApplication(input: $input) {
+    success
   }
+}
 `
-
 interface ErrorResponse {
   errors: {
     message: string
   }
 }
 
-type EndorsementListResponse =
+type CreateApplicationResponse =
   | {
       data: {
-        endorsementSystemCreateEndorsementList: {
-          id: string
-        }
+        unemploymentSubmitApplication: SubmitApplicationResponse
       }
     }
   | ErrorResponse
 
-export interface PartyApplicationServiceOptions {
-  adminEmails: GenerateAssignSupremeCourtApplicationEmailOptions
-}
-
-interface PartyLetterData {
-  partyName: string
-  partyLetter: string
-}
-
 @Injectable()
 export class UnemploymentBenefitsService {
-  constructor(@Inject(LOGGER_PROVIDER) private logger: Logger) {}
+  constructor(
+    @Inject(LOGGER_PROVIDER) private logger: Logger,
+    private readonly sharedTemplateAPIService: SharedTemplateApiService,
+  ) {}
   async createApplication({
     application,
     authorization,
   }: TemplateApiModuleActionProps) {
-    const unemploymentAnswers = (application.answers
-      ?.data as unknown) as UnemploymentBenefitsSchema
+    const unemploymentAnswers = (application.answers as unknown) as UnemploymentBenefitsSchema
 
-    unemploymentAnswers
-
-    const endorsementList: EndorsementListResponse = await this.sharedTemplateAPIService
-      .makeGraphqlQuery(authorization, CREATE_ENDORSEMENT_LIST_QUERY, {
-        input: {
-          title: partyLetter.partyName,
-          description: partyLetter.partyLetter,
-          endorsementMeta: ['fullName', 'address', 'signedTags'],
-          tags: [application.answers.constituency as EndorsementListTagsEnum],
-          validationRules: [
-            {
-              type: 'minAgeAtDate',
-              value: {
-                date: '2021-09-25T00:00:00Z',
-                age: 18,
-              },
-            },
-            {
-              type: 'uniqueWithinTags',
-              value: {
-                tags: [
-                  EndorsementListTagsEnum.partyApplicationNordausturkjordaemi2021,
-                  EndorsementListTagsEnum.partyApplicationNordvesturkjordaemi2021,
-                  EndorsementListTagsEnum.partyApplicationReykjavikurkjordaemiNordur2021,
-                  EndorsementListTagsEnum.partyApplicationReykjavikurkjordaemiSudur2021,
-                  EndorsementListTagsEnum.partyApplicationSudurkjordaemi2021,
-                  EndorsementListTagsEnum.partyApplicationSudvesturkjordaemi2021,
-                ],
-              },
-            },
-          ],
-          meta: {
-            // to be able to link back to this application
-            applicationTypeId: application.typeId,
-            applicationId: application.id,
+    const noResponseText = 'Not specified'
+    const unemploymentApplicationResponse: CreateApplicationResponse = await this.sharedTemplateAPIService
+      .makeGraphqlQuery<MutationUnemploymentSubmitApplicationArgs>(
+        authorization,
+        SUBMIT_UNEMPLOYMENT_APPLICATION_QUERY,
+        {
+          input: {
+            secretWord: unemploymentAnswers.secretWord ?? noResponseText,
+            getPaperCopy: unemploymentAnswers.getPaperCopy === 'yes',
+            employmentStatus:
+              unemploymentAnswers.employmentStatus ?? noResponseText,
+            employmentRatio: Number(unemploymentAnswers.employmentRatio ?? 0),
+            bank: unemploymentAnswers.payments.bank,
+            pensionFund:
+              unemploymentAnswers.payments.pensionFund ?? noResponseText,
+            union: unemploymentAnswers.payments.union ?? noResponseText,
+            privatePensionFund:
+              unemploymentAnswers.payments.privatePensionFund ?? noResponseText,
+            pensionFundPercentage: Number(
+              unemploymentAnswers.payments.pensionFundPercentage ?? 0,
+            ),
+            personalTaxCreditRatio: Number(
+              unemploymentAnswers.personalTaxCreditRatio ?? 0,
+            ),
+            monthlyIncome: Number(unemploymentAnswers.monthlyIncome),
+            insurancePayments: Number(unemploymentAnswers.insurancePayments),
+            onParentalLeave: unemploymentAnswers.onParentalLeave === 'yes',
           },
         },
-      })
+      )
       .then((response) => response.json())
 
-    if ('errors' in endorsementList) {
-      throw new Error('Failed to create endorsement list')
+    if ('errors' in unemploymentApplicationResponse) {
+      throw new Error('Failed to create unemployment application')
     }
 
-    // This gets written to externalData under the key createEndorsementList
     return {
-      id: endorsementList.data.endorsementSystemCreateEndorsementList.id,
+      success: true,
     }
   }
 }

@@ -1,0 +1,10 @@
+schema:
+  - apps/api/src/api.graphql
+generates:
+  libs/application/template-api-modules/src/lib/modules/templates/unemployment-benefits/types/schema.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+hooks:
+  afterAllFileWrite:
+    - prettier --write
