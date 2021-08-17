@@ -63,9 +63,7 @@ export const DataSchema = z.object({
       params: m.dataSchemeNationalId,
     }).optional(),
     childrenNationalId:
-      z.string().refine((n) => n && kennitala.isValid(n), {
-        params: m.dataSchemeNationalId,
-      }).optional(),
+      z.string().optional(),
   }),
   secretWord: z.string().optional(),
   getPaperCopy: z.enum(['yes', 'no']),

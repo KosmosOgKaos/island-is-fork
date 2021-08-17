@@ -8,7 +8,7 @@ import {
 } from '@island.is/island-ui/core'
 import { FieldBaseProps, formatText } from '@island.is/application/core'
 import { m } from '../lib/messages'
-import { useLocale } from '@island.is/localization'
+import { NationalRegistryGetPerson} from '../types/schema'
 
 interface ExpectedBenefitsData {
   nrOfChildren: number
@@ -59,13 +59,16 @@ const getStatus = ({endDate}: StatusData ) => {
 
 const ExpectedBenefits: FC<FieldBaseProps> = ({ application }) => {
   const {person, employment, pensionPayments, insurancePayments, monthlyIncome} = application.answers
+  const {nationalRegistry} = application.externalData
+  const nrChild = (nationalRegistry
+    .data as NationalRegistryGetPerson).childrenNationalId.length
   const {endDate, employmentRatio} = ((employment as unknown) as employmentData)
 
-  const income = Number(pensionPayments) + Number(insurancePayments) + Number(monthlyIncome)
+  var income = Number(pensionPayments?? 0) + Number(insurancePayments ?? 0) + Number(monthlyIncome ?? 0)
   const ratio = Number(employmentRatio) / 100
   const employmentStatus = getStatus({endDate: endDate})
   const benefit = getBenefit({
-    nrOfChildren: 2,
+    nrOfChildren: nrChild,
     monthlyIncome: income,
     employmentRatio: ratio,
     employmentStatus: employmentStatus

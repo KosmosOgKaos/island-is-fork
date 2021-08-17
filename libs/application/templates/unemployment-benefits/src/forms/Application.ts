@@ -24,7 +24,7 @@ import {
 } from '@island.is/application/core'
 import { ApiActions } from '../shared'
 import { m } from '../lib/messages'
-import { NationalRegistryGetPerson } from '../types/schema'
+import { NationalRegistryGetPerson} from '../types/schema'
 
 export const application: Form = buildForm({
   id: 'ExampleFormDraft',
@@ -122,11 +122,11 @@ export const application: Form = buildForm({
                 }),
                 buildTextField({
                   id: 'person.childrenNationalId',
-                  title: m.childId,
+                  title: 'Nafn barns',
                   width: 'half',
                   defaultValue: ({ externalData }: any) =>
                     (externalData?.nationalRegistry
-                      .data as NationalRegistryGetPerson).childrenNationalId[0] ?? '0101307789',
+                      .data as NationalRegistryGetPerson).childrenNationalId[0]
                 }),
               ],
             }),

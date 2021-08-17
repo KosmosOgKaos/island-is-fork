@@ -14,6 +14,7 @@ export interface NationalRegistryClientConfig {
   url: string
 }
 
+
 export interface NationalRegistryResponse {
   name: string
   nationalId: string
@@ -36,18 +37,22 @@ export class NationalRegistryClient {
   }
 
   async getPerson(nationalId: string): Promise<NationalRegistryResponse> {
-    const response = await this.nationalRegistryApi.peopleControllerFindPerson({
+    const person = await this.nationalRegistryApi.peopleControllerFindPerson({
+      nationalId,
+    })
+
+    const children = await this.nationalRegistryApi.childrenControllerGetChildren({
       nationalId,
     })
 
     return {
-      name: response.fullName,
-      nationalId: response.nationalId,
-      phoneNumber: response.phone,
-      email: response.email,
-      address: response.address,
-      partnerNationalId: response.partnerId ?? '',
-      childrenNationalId: [],
+      name: person.fullName,
+      nationalId: person.nationalId,
+      phoneNumber: person.phone,
+      email: person.email,
+      address: person.address,
+      partnerNationalId: person.partnerId ?? '',
+      childrenNationalId: children.map((child) => child.fullName ),
     }
   }
 }
