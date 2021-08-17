@@ -249,8 +249,8 @@
       "@island.is/clients/national-registry-v3": [
         "libs/clients/national-registry/v3/src/index.ts"
       ],
-      "@island.is/clients/unemployment-registry-v1": [
-        "libs/clients/unemployment-registry/v1/src/index.ts"
+      "@island.is/clients/directorate-of-labor-v1": [
+        "libs/clients/directorate-of-labor/v1/src/index.ts"
       ],
       "@island.is/clients/payment": ["libs/clients/payment/src/index.ts"],
       "@island.is/clients/payment-schedule": [

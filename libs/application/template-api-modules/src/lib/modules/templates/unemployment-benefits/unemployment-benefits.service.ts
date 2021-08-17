@@ -55,8 +55,11 @@ export class UnemploymentBenefitsService {
             secretWord: unemploymentAnswers.secretWord ?? noResponseText,
             getPaperCopy: unemploymentAnswers.getPaperCopy === 'yes',
             employmentStatus:
-              unemploymentAnswers.employment?.employmentStatus ?? noResponseText,
-            employmentRatio: Number(unemploymentAnswers.employment?.employmentRatio ?? 0),
+              unemploymentAnswers.employment?.employmentStatus ??
+              noResponseText,
+            employmentRatio: Number(
+              unemploymentAnswers.employment?.employmentRatio ?? 0,
+            ),
             bank: unemploymentAnswers.payments.bank,
             pensionFund:
               unemploymentAnswers.payments.pensionFund ?? noResponseText,
@@ -70,7 +73,9 @@ export class UnemploymentBenefitsService {
               unemploymentAnswers.personalTaxCreditRatio ?? 0,
             ),
             monthlyIncome: Number(unemploymentAnswers.monthlyIncome ?? 0),
-            insurancePayments: Number(unemploymentAnswers.insurancePayments ?? 0),
+            insurancePayments: Number(
+              unemploymentAnswers.insurancePayments ?? 0,
+            ),
             onParentalLeave: unemploymentAnswers.onParentalLeave === 'yes',
           },
         },
@@ -78,7 +83,6 @@ export class UnemploymentBenefitsService {
       .then((response) => response.json())
 
     if ('errors' in unemploymentApplicationResponse) {
-      console.log(unemploymentApplicationResponse)
       throw new Error('Failed to create unemployment application')
     }
 

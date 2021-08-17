@@ -247,7 +247,7 @@ const autoSchemaFile = environment.production
       username: environment.paymentSchedule.username,
     }),
     UnemploymentModule.register({
-      unemploymentRegistryClient: environment.unemploymentRegistryClient,
+      directorateOfLaborClient: environment.directorateOfLaborClient,
     }),
   ],
 })

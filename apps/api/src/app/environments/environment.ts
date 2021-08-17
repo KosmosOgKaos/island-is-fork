@@ -149,8 +149,8 @@ const devConfig = {
     username: process.env.PAYMENT_SCHEDULE_USER,
     password: process.env.PAYMENT_SCHEDULE_PASSWORD,
   },
-  unemploymentRegistryClient: {
-    url: 'http://localhost:5555',
+  directorateOfLaborClient: {
+    url: 'http://localhost:4252',
   },
 }
 
@@ -291,8 +291,8 @@ const prodConfig = {
     username: process.env.PAYMENT_SCHEDULE_USER,
     password: process.env.PAYMENT_SCHEDULE_PASSWORD,
   },
-  unemploymentRegistryClient: {
-    url: process.env.UNEMPLOYMENT_REGISTRY_CLIENT,
+  directorateOfLaborClient: {
+    url: process.env.DIRECTORATE_OF_LABOR_CLIENT,
   },
 }
 
