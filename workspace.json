@@ -3374,7 +3374,7 @@
         "schemas/openapi-generator": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "command": "yarn openapi-generator -o libs/clients/national-registry/v3/gen/fetch -i apps/services/unemployment-benefits/src/openapi.yaml --additional-properties=enumPropertyNaming=original"
+            "command": "yarn openapi-generator -o libs/clients/national-registry/v3/gen/fetch -i apps/services/national-registry/src/openapi.yaml --additional-properties=enumPropertyNaming=original"
           }
         }
       }
@@ -7692,7 +7692,7 @@
         "seed": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "command": "../../../node_modules/.bin/sequelize-cli db:seed",
+            "command": "../../../node_modules/.bin/sequelize-cli db:seed:all",
             "cwd": "apps/services/national-registry"
           }
         },

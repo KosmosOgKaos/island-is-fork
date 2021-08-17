@@ -12,25 +12,30 @@ type GetPersonResponse = {
 export class NationalRegistryDataProvider extends BasicDataProvider {
   type = 'NationalRegistryDataProvider'
 
+<<<<<<< Updated upstream
   async provide(application: Application): Promise<NationalRegistryGetPerson> {
+=======
+  async provide(
+    application: Application,
+  ): Promise<NationalRegistryProviderData> {
+>>>>>>> Stashed changes
     const query = `
-      query getPerson {
-        getPerson {
-          nationalId
-          phoneNumber
-          name
-          email
-          address
-          partnerNationalId
-          childrenNationalId
-        }
+    query getPerson {
+      getPerson {
+        nationalId
+        phoneNumber
+        name
+        email
+        address
+        partnerNationalId
+        childrenNationalId
       }
+    }
     `
 
     const response = await this.useGraphqlGateway<GetPersonResponse>(
       query,
     ).then((res) => res.json())
-
     // we did not find this person, let the use know
     if (!response.data?.getPerson || 'errors' in response) {
       console.log('response', response)

@@ -15,7 +15,7 @@ export interface NationalRegistryClientConfig {
 }
 
 export interface NationalRegistryResponse {
-  name: 'Mock user'
+  name: string
   nationalId: string
   phoneNumber: string
   email: string
@@ -36,17 +36,19 @@ export class NationalRegistryClient {
   }
 
   async getPerson(nationalId: string): Promise<NationalRegistryResponse> {
-    // const response = await this.nationalRegistryApi.unemploymentBenefitsControllerFindPerson()
+    const response = await this.nationalRegistryApi.peopleControllerFindPerson({
+      nationalId,
+    })
+    console.log('Got person', response)
 
-    // TODO: Make request to nationalRegistry service here
     return {
-      name: 'Mock user',
-      nationalId: nationalId,
-      phoneNumber: '123-1337',
-      email: 'mockuser@example.com',
-      address: 'Mock Address 23',
-      partnerNationalId: '0000000000',
-      childrenNationalId: ['1111111111', '2222222222'],
+      name: response.fullName,
+      nationalId: response.nationalId,
+      phoneNumber: response.phone,
+      email: response.email,
+      address: response.address,
+      partnerNationalId: response.partnerId ?? '',
+      childrenNationalId: [],
     }
   }
 }
