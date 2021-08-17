@@ -58,28 +58,12 @@ export class CreateApplicationDto {
   personalTaxCreditRatio!: number
 
   @ApiProperty()
-  @IsNumber()
-  personalTaxCreditMonthlyAmount!: number
-
-  @ApiProperty()
   @IsInt()
   monthlyIncome!: number
 
   @ApiProperty()
   @IsInt()
   insurancePayments!: number
-
-  @ApiProperty()
-  @IsNumber()
-  pensionPayments!: number
-
-  @ApiProperty()
-  @IsNumber()
-  incomeStepOne!: number
-
-  @ApiProperty()
-  @IsNumber()
-  incomeStepTwo!: number
 
   @ApiProperty()
   @IsBoolean()

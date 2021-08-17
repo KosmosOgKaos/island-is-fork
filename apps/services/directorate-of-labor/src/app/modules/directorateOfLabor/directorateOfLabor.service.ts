@@ -32,7 +32,14 @@ export class DirectorateOfLaborService {
 
   async createApplication(create: CreateApplicationDto): Promise<Application> {
     this.logger.debug('Creating application')
-    return await this.applicationModel.create(create)
+    return await this.applicationModel.create({
+      ...create,
+      // constants these values would come from a trusted external source
+      personalTaxCreditMonthlyAmount: 50792,
+      pensionPayments: 1,
+      incomeStepOne: 31.45,
+      incomeStepTwo: 37.95,
+    })
   }
 
   async updateApplication(
