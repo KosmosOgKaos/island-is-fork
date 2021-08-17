@@ -1,9 +1,8 @@
 'use strict'
-const { uuid } = require('uuidv4')
 
-const union = (name) => ({
+const union = ({ name, union_id }) => ({
   name,
-  union_id: uuid(),
+  union_id,
   created: new Date(),
   modified: new Date(),
 })
@@ -11,8 +10,14 @@ const union = (name) => ({
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('unions', [
-      union('Verzlunarmannafélag Reykjavíkur (VR)'),
-      union('Efling'),
+      union({
+        union_id: '86553292-4f26-4f79-82eb-9092e830e20f',
+        name: 'Verzlunarmannafélag Reykjavíkur (VR)',
+      }),
+      union({
+        name: 'Efling',
+        union_id: 'f5194065-6039-44c9-9e22-c32a807fd84a',
+      }),
     ])
   },
 

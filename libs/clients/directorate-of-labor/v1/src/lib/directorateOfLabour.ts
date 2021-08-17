@@ -1,5 +1,5 @@
 /**
- * We keep this client framework agnostic to be able to use it for all communications regardless of stack
+ * We keep this client framework agnostic to be able to use it for all communications
  * Never the less there already exists a client covering this case we would integrate this fetch with the existing client under normal circumstances
  * This client serves a demonstration client of how we work with external services
  * Ideally this would use X-road to communicate securely with external organization services
@@ -64,13 +64,8 @@ export class DirectorateOfLaborClient {
         personalTaxCreditRatio: application.personalTaxCreditRatio,
         privatePensionFundId: application.privatePensionFund,
         secretWord: application.secretWord,
-        unionId: application.secretWord,
+        unionId: application.union,
         nationalId,
-        //constants
-        personalTaxCreditMonthlyAmount: 1337,
-        pensionPayments: 1337,
-        incomeStepOne: 38,
-        incomeStepTwo: 52,
       },
     })
 

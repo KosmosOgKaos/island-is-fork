@@ -22,7 +22,7 @@ const assertExists = <T>(resource: T): void => {
   }
 }
 
-@Controller('people')
+@Controller('v1/people')
 export class PeopleController {
   constructor(
     private readonly nationalRegistryService: NationalRegistryService

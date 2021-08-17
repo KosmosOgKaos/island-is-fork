@@ -5,6 +5,7 @@ import {
   NationalRegistryScope,
   UserProfileScope,
   EndorsementsScope,
+  UnemploymentScope,
 } from '@island.is/auth/scopes'
 
 const userMocked = process.env.API_MOCKS === 'true'
@@ -29,6 +30,7 @@ if (userMocked) {
       UserProfileScope.read,
       NationalRegistryScope.individuals,
       EndorsementsScope.main,
+      // UnemploymentScope.main, for this scope to actually work we would need to add it to the identity server
     ],
     post_logout_redirect_uri: `${window.location.origin}`,
     userStorePrefix: 'as.',

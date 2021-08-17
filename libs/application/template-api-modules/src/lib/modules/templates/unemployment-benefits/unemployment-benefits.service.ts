@@ -8,9 +8,7 @@ import {
   MutationUnemploymentSubmitApplicationArgs,
   SubmitApplicationResponse,
 } from './types/schema'
-import {
-  generateApplicationApprovedEmail,
-} from './emailGenerators'
+import { generateApplicationApprovedEmail } from './emailGenerators'
 
 const SUBMIT_UNEMPLOYMENT_APPLICATION_QUERY = `
 mutation unemploymentSubmitApplication($input: SubmitApplicationDto!) {
@@ -83,7 +81,10 @@ export class UnemploymentBenefitsService {
       .then((response) => response.json())
 
     if ('errors' in unemploymentApplicationResponse) {
-      throw new Error('Failed to create unemployment application')
+      this.logger.error('Failed to create unemployment application')
+      throw new Error(
+        'Ekki tókst að senda inn umsókn, vinsamlegast reyndu aftur síðar.',
+      )
     }
 
     await this.sharedTemplateAPIService.sendEmail(

@@ -20,7 +20,7 @@ const assertExists = <T>(resource: T): void => {
   }
 }
 
-@Controller('applications')
+@Controller('v1/applications')
 export class ApplicationController {
   constructor(
     private readonly directorateOfLaborService: DirectorateOfLaborService,

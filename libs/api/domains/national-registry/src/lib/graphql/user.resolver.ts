@@ -2,14 +2,14 @@ import { UseGuards } from '@nestjs/common'
 import { Resolver, Query, ResolveField, Parent } from '@nestjs/graphql'
 import * as kennitala from 'kennitala'
 
-import type { User as AuthUser } from '@island.is/auth-nest-tools'
+import { Scopes, User as AuthUser } from '@island.is/auth-nest-tools'
 import {
   IdsUserGuard,
   ScopesGuard,
   CurrentUser,
 } from '@island.is/auth-nest-tools'
 import { Audit } from '@island.is/nest/audit'
-
+import { NationalRegistryScope } from '@island.is/auth/scopes'
 import { NationalRegistryUser, Citizenship } from './models'
 import { NationalRegistryService } from '../nationalRegistry.service'
 import { User } from '../types'
@@ -36,7 +36,9 @@ export class UserResolver {
    * We make sure the model and type match here by not defining return type on getPerson in service
    * This way the build will fail if changes are made to the underlying service since the types are generated at build
    */
+  @Scopes(NationalRegistryScope.individuals)
   @Query(() => NationalRegistryGetPerson)
+  @Audit()
   getPerson(@CurrentUser() user: AuthUser): Promise<NationalRegistryGetPerson> {
     return this.nationalRegistryService.getPerson(user.nationalId)
   }

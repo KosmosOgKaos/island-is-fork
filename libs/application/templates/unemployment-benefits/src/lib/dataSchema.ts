@@ -11,8 +11,8 @@ export interface UnemploymentBenefitsSchema {
     phoneNumber: string
     email: string
     address: string
-    partnerNationalId: string
-    childrenNationalId: string
+    partnerNationalId?: string
+    childrenNationalId?: string
   }
   secretWord?: string
   getPaperCopy: 'yes' | 'no'
@@ -34,8 +34,8 @@ export interface UnemploymentBenefitsSchema {
   incomeStepTwo?: string
   onParentalLeave: 'yes' | 'no'
   employment?: {
-    employmentStatus: string
-    employmentRatio: string
+    employmentStatus?: string
+    employmentRatio?: string
     employerEmail?: string
     employerName?: string
     startDate?: string
@@ -61,11 +61,11 @@ export const DataSchema = z.object({
     address: z.string().nonempty().max(256),
     partnerNationalId: z.string().refine((n) => n && kennitala.isValid(n), {
       params: m.dataSchemeNationalId,
-    }),
+    }).optional(),
     childrenNationalId:
       z.string().refine((n) => n && kennitala.isValid(n), {
         params: m.dataSchemeNationalId,
-      }),
+      }).optional(),
   }),
   secretWord: z.string().optional(),
   getPaperCopy: z.enum(['yes', 'no']),
@@ -109,14 +109,15 @@ export const DataSchema = z.object({
     .optional(),
   onParentalLeave: z.enum(['yes', 'no']),
   employment: z.object({
-    employmentStatus: z.string(),
+    employmentStatus: z.string().optional(),
     employmentRatio: z
       .string()
-      .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100),
-    employerEmail: z.string().email(),
-    employerName: z.string(),
-    startDate: z.string(),
-    endDate: z.string(),
+      .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100)
+      .optional(),
+    employerEmail: z.string().email().optional(),
+    employerName: z.string().optional(),
+    startDate: z.string().optional(),
+    endDate: z.string().optional(),
   }),
 })
 
