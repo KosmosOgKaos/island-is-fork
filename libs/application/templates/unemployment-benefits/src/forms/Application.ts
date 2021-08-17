@@ -126,15 +126,7 @@ export const application: Form = buildForm({
                   width: 'half',
                   defaultValue: ({ externalData }: any) =>
                     (externalData?.nationalRegistry
-                      .data as NationalRegistryGetPerson).childrenNationalId[0],
-                }),
-                buildTextField({
-                  id: 'person.childrenNationalId',
-                  title: m.childId,
-                  width: 'half',
-                  defaultValue: ({ externalData }: any) =>
-                    (externalData?.nationalRegistry
-                      .data as NationalRegistryGetPerson).childrenNationalId[1],
+                      .data as NationalRegistryGetPerson).childrenNationalId[0] ?? '0101307789',
                 }),
               ],
             }),
@@ -228,13 +220,11 @@ export const application: Form = buildForm({
                   id: 'insurancePayments',
                   title:
                     'Elli- eða örorkulífeyrisgreiðslur frá Tryggingastofnun',
-                  defaultValue: '0'
                 }),
                 buildTextField({
                   id: 'pensionPayments',
                   title:
                     'Elli- og örorkulífeyrisgreiðslur úr almennum lífeyrissjóðum',
-                  defaultValue: '0'
                 }),
                 buildRadioField({
                   id: 'onParentalLeave',
