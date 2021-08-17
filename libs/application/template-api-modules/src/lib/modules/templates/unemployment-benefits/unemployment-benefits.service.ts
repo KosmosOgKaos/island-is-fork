@@ -8,6 +8,9 @@ import {
   MutationUnemploymentSubmitApplicationArgs,
   SubmitApplicationResponse,
 } from './types/schema'
+// import {
+//   generateApplicationApprovedEmail,
+// } from './emailGenerators'
 
 const SUBMIT_UNEMPLOYMENT_APPLICATION_QUERY = `
 mutation unemploymentSubmitApplication($input: SubmitApplicationDto!) {
@@ -66,8 +69,8 @@ export class UnemploymentBenefitsService {
             personalTaxCreditRatio: Number(
               unemploymentAnswers.personalTaxCreditRatio ?? 0,
             ),
-            monthlyIncome: Number(unemploymentAnswers.monthlyIncome),
-            insurancePayments: Number(unemploymentAnswers.insurancePayments),
+            monthlyIncome: Number(unemploymentAnswers.monthlyIncome ?? 0),
+            insurancePayments: Number(unemploymentAnswers.insurancePayments ?? 0),
             onParentalLeave: unemploymentAnswers.onParentalLeave === 'yes',
           },
         },
@@ -75,8 +78,14 @@ export class UnemploymentBenefitsService {
       .then((response) => response.json())
 
     if ('errors' in unemploymentApplicationResponse) {
+      console.log(unemploymentApplicationResponse)
       throw new Error('Failed to create unemployment application')
     }
+
+    // await this.sharedTemplateAPIService.sendEmail(
+    //   generateApplicationApprovedEmail,
+    //   application,
+    // )
 
     return {
       success: true,

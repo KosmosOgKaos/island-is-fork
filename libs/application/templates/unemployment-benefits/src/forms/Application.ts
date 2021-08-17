@@ -228,11 +228,13 @@ export const application: Form = buildForm({
                   id: 'insurancePayments',
                   title:
                     'Elli- eða örorkulífeyrisgreiðslur frá Tryggingastofnun',
+                  defaultValue: '0'
                 }),
                 buildTextField({
                   id: 'pensionPayments',
                   title:
                     'Elli- og örorkulífeyrisgreiðslur úr almennum lífeyrissjóðum',
+                  defaultValue: '0'
                 }),
                 buildRadioField({
                   id: 'onParentalLeave',

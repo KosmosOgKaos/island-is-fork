@@ -12,7 +12,7 @@ export interface UnemploymentBenefitsSchema {
     email: string
     address: string
     partnerNationalId: string
-    childrenNationalId: string[]
+    childrenNationalId: string
   }
   secretWord?: string
   getPaperCopy: 'yes' | 'no'
@@ -62,11 +62,10 @@ export const DataSchema = z.object({
     partnerNationalId: z.string().refine((n) => n && kennitala.isValid(n), {
       params: m.dataSchemeNationalId,
     }),
-    childrenNationalId: z.array(
+    childrenNationalId:
       z.string().refine((n) => n && kennitala.isValid(n), {
         params: m.dataSchemeNationalId,
       }),
-    ),
   }),
   secretWord: z.string().optional(),
   getPaperCopy: z.enum(['yes', 'no']),
@@ -94,12 +93,10 @@ export const DataSchema = z.object({
     .optional(),
   insurancePayments: z
     .string()
-    .refine((x) => parseFloat(x))
-    .optional(),
+    .refine((x) => parseFloat(x)),
   pensionPayments: z
     .string()
-    .refine((x) => parseFloat(x))
-    .optional(),
+    .refine((x) => parseFloat(x)),
   incomeStepOne: z
     .string()
     .refine((x) => parseFloat(x) >= 0 && parseFloat(x) <= 100)
