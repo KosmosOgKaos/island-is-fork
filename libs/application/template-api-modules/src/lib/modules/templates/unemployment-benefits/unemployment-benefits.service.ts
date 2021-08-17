@@ -8,9 +8,7 @@ import {
   MutationUnemploymentSubmitApplicationArgs,
   SubmitApplicationResponse,
 } from './types/schema'
-import {
-  generateApplicationApprovedEmail,
-} from './emailGenerators'
+import { generateApplicationApprovedEmail } from './emailGenerators'
 
 const SUBMIT_UNEMPLOYMENT_APPLICATION_QUERY = `
 mutation unemploymentSubmitApplication($input: SubmitApplicationDto!) {
@@ -83,6 +81,7 @@ export class UnemploymentBenefitsService {
       .then((response) => response.json())
 
     if ('errors' in unemploymentApplicationResponse) {
+      this.logger.error('Failed to create unemployment application')
       throw new Error('Failed to create unemployment application')
     }
 
