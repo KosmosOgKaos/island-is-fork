@@ -2776,8 +2776,10 @@
               "yarn nx run services-directorate-of-labor:dev-services",
               "yarn nx run application-system-api:dev-services",
               "yarn nx run application-system-api:migrate",
+              "yarn nx run services-national-registry:migrate",
               "yarn nx run services-directorate-of-labor:migrate",
-              "yarn nx run services-national-registry:seed"
+              "yarn nx run services-national-registry:seed",
+              "yarn nx run services-directorate-of-labor:seed"
             ],
             "parallel": false
           }
