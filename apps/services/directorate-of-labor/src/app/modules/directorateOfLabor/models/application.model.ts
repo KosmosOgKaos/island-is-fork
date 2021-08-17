@@ -6,7 +6,11 @@ import {
   Table,
   CreatedAt,
   UpdatedAt,
+  BelongsTo,
+  ForeignKey,
 } from 'sequelize-typescript'
+import { PensionFund } from './pensionFund.model'
+import { Union } from './union.model'
 
 @Table({
   tableName: 'applications',
@@ -62,27 +66,6 @@ export class Application extends Model<Application> {
     allowNull: false,
   })
   bank!: string
-
-  @ApiProperty()
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  pensionFund!: string
-
-  @ApiProperty()
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  union!: string
-
-  @ApiProperty()
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  privatePensionFund!: string
 
   @ApiProperty()
   @Column({
@@ -146,6 +129,36 @@ export class Application extends Model<Application> {
     allowNull: false,
   })
   onParentalLeave!: boolean
+
+  @ForeignKey(() => Union)
+  @Column({
+    type: DataType.UUID,
+    allowNull: false,
+  })
+  unionId!: string
+
+  @BelongsTo(() => Union)
+  union!: Union
+
+  @ForeignKey(() => PensionFund)
+  @Column({
+    type: DataType.UUID,
+    allowNull: false,
+  })
+  pensionFundId!: string
+
+  @BelongsTo(() => PensionFund, 'pensionFundId')
+  pensionFund!: PensionFund
+
+  @ForeignKey(() => PensionFund)
+  @Column({
+    type: DataType.UUID,
+    allowNull: true,
+  })
+  privatePensionFundId!: string
+
+  @BelongsTo(() => PensionFund, 'privatePensionFundId')
+  privatePensionFund!: PensionFund
 
   @ApiProperty()
   @CreatedAt

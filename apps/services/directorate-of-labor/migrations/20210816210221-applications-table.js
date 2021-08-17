@@ -36,17 +36,17 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        pension_fund: {
-          type: Sequelize.STRING,
+        union_id: {
+          type: Sequelize.UUID,
           allowNull: false,
         },
-        union: {
-          type: Sequelize.STRING,
+        pension_fund_id: {
+          type: Sequelize.UUID,
           allowNull: false,
         },
-        private_pension_fund: {
-          type: Sequelize.STRING,
-          allowNull: false,
+        private_pension_fund_id: {
+          type: Sequelize.UUID,
+          allowNull: true,
         },
         pension_fund_percentage:  {
           type: Sequelize.FLOAT,

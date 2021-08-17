@@ -3,7 +3,9 @@ import {
   IsInt,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
+  IsUUID,
 } from 'class-validator'
 import { IsNationalId } from '@island.is/nest/validators'
 import { ApiProperty } from '@nestjs/swagger'
@@ -35,16 +37,17 @@ export class CreateApplicationDto {
   bank!: string
 
   @ApiProperty()
-  @IsString()
-  pensionFund!: string
+  @IsUUID()
+  pensionFundId!: string
 
   @ApiProperty()
-  @IsString()
-  union!: string
+  @IsUUID()
+  unionId!: string
 
   @ApiProperty()
-  @IsString()
-  privatePensionFund!: string
+  @IsOptional()
+  @IsUUID()
+  privatePensionFundId!: string
 
   @ApiProperty()
   @IsNumber()

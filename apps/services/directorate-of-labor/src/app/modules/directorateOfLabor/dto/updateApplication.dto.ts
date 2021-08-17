@@ -5,6 +5,7 @@ import {
   IsNumber,
   IsString,
   IsOptional,
+  IsUUID,
 } from 'class-validator'
 import { IsNationalId } from '@island.is/nest/validators'
 import { ApiProperty } from '@nestjs/swagger'
@@ -43,18 +44,18 @@ export class UpdateApplicationDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsString()
-  pensionFund!: string
+  @IsUUID()
+  pensionFundId!: string
 
   @ApiProperty()
   @IsOptional()
-  @IsString()
-  union!: string
+  @IsUUID()
+  unionId!: string
 
   @ApiProperty()
   @IsOptional()
-  @IsString()
-  privatePensionFund!: string
+  @IsUUID()
+  privatePensionFundId!: string
 
   @ApiProperty()
   @IsOptional()

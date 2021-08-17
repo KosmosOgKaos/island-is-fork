@@ -29,7 +29,7 @@ export class ApplicationController {
   @Get(':applicationId')
   @ApiOkResponse({ type: Application })
   async getApplication(@Param('applicationId') applicationId: string) {
-    const application = this.directorateOfLaborService.getApplicationById(
+    const application = await this.directorateOfLaborService.getApplicationById(
       applicationId,
     )
     assertExists(application)
@@ -39,7 +39,6 @@ export class ApplicationController {
   @Post()
   @ApiOkResponse({ type: Application })
   async createApplication(@Body() application: CreateApplicationDto) {
-    console.log(application)
     return this.directorateOfLaborService.createApplication(application)
   }
 
@@ -61,8 +60,6 @@ export class ApplicationController {
   async deleteApplication(
     @Param('applicationId') applicationId: string,
   ): Promise<boolean> {
-    return await this.directorateOfLaborService.deleteApplication(
-      applicationId,
-    )
+    return await this.directorateOfLaborService.deleteApplication(applicationId)
   }
 }
