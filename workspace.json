@@ -7592,7 +7592,7 @@
         "seed/undo": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "command": "../../../node_modules/.bin/sequelize-cli db:seed:undo",
+            "command": "../../../node_modules/.bin/sequelize-cli db:seed:undo:all",
             "cwd": "apps/services/directorate-of-labor"
           }
         },

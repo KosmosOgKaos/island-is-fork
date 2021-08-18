@@ -2,14 +2,14 @@ import { service, ServiceBuilder } from '../../../../infra/src/dsl/dsl'
 import { PostgresInfo } from '../../../../infra/src/dsl/types/input-types'
 
 const postgresInfo: PostgresInfo = {
-  passwordSecret: '/k8s/services-unemployment-benefits-api/DB_PASSWORD',
+  passwordSecret: '/k8s/services-services-directorate-of-labor-api/DB_PASSWORD',
   name: 'services_party_letter_registry_api',
   username: 'services_party_letter_registry_api',
 }
-export const serviceSetup = (): ServiceBuilder<'unemployment-benefits-api'> =>
-  service('unemployment-benefits-api')
-    .image('services-unemployment-benefits-api')
-    .namespace('unemployment-benefits')
+export const serviceSetup = (): ServiceBuilder<'services-directorate-of-labor-api'> =>
+  service('services-directorate-of-labor-api')
+    .image('services-services-directorate-of-labor-api')
+    .namespace('services-directorate-of-labor')
     .postgres(postgresInfo)
     .initContainer({
       containers: [

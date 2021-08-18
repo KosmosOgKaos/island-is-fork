@@ -10,8 +10,7 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html', 'json'],
-  coverageDirectory:
-    '../../../../coverage/apps/services/directorate-of-labor',
+  coverageDirectory: '../../../../coverage/apps/services/directorate-of-labor',
   setupFiles: ['./test/environment.jest.ts'],
   setupFilesAfterEnv: ['./test/setup.ts'],
   globalSetup: './test/globalSetup.ts',
