@@ -4,7 +4,7 @@ import { LOGGER_PROVIDER } from '@island.is/logging'
 import type { Logger } from '@island.is/logging'
 import { PensionFund } from './models/pensionFund.model'
 import { CreatePensionFundDto } from './dto/createPensionFund.dto'
-import { UpdatePensionFundDto } from './dto/updateApplication.dto'
+import { UpdatePensionFundDto } from './dto/updatePensionFund.dto'
 
 @Injectable()
 export class PensionFundsService {

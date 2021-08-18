@@ -5,8 +5,4 @@ export class CreateUnionDto {
   @ApiProperty()
   @IsString()
   name!: string
-
-  @ApiProperty()
-  @IsBoolean()
-  active!: string
 }

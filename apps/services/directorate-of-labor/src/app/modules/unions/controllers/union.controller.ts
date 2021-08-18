@@ -4,7 +4,7 @@ import { Union } from '../models/union.model'
 import { UnionsService } from '../unions.service'
 import { assertExists } from '../../../lib/helpers'
 import { CreateUnionDto } from '../dto/createUnion.dto'
-import { UpdateUnionDto } from '../dto/updateApplication.dto'
+import { UpdateUnionDto } from '../dto/updateUnion.dto'
 
 @ApiTags('unions')
 @Controller('v1/unions')

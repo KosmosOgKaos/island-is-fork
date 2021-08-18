@@ -5,8 +5,4 @@ export class CreatePensionFundDto {
   @ApiProperty()
   @IsString()
   name!: string
-
-  @ApiProperty()
-  @IsString()
-  active!: boolean
 }

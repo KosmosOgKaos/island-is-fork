@@ -4,7 +4,7 @@ import { PensionFund } from '../models/pensionFund.model'
 import { PensionFundsService } from '../pensionFunds.service'
 import { assertExists } from '../../../lib/helpers'
 import { CreatePensionFundDto } from '../dto/createPensionFund.dto'
-import { UpdatePensionFundDto } from '../dto/updateApplication.dto'
+import { UpdatePensionFundDto } from '../dto/updatePensionFund.dto'
 
 @ApiTags('pensionFunds')
 @Controller('v1/pension-funds')

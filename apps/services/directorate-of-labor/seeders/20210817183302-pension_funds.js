@@ -1,5 +1,4 @@
 'use strict'
-const { uuid } = require('uuidv4')
 
 const pensionFund = ({ name, id }) => ({
   name,

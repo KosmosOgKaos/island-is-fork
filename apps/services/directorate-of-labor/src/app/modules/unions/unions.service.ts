@@ -4,7 +4,7 @@ import { LOGGER_PROVIDER } from '@island.is/logging'
 import type { Logger } from '@island.is/logging'
 import { Union } from './models/union.model'
 import { CreateUnionDto } from './dto/createUnion.dto'
-import { UpdateUnionDto } from './dto/updateApplication.dto'
+import { UpdateUnionDto } from './dto/updateUnion.dto'
 
 @Injectable()
 export class UnionsService {
@@ -32,7 +32,7 @@ export class UnionsService {
   }
 
   async createUnion(create: CreateUnionDto): Promise<Union> {
-    this.logger.debug('Creating application')
+    this.logger.debug('Creating union')
     return await this.unionModel.create(create)
   }
 
