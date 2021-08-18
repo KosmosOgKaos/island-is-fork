@@ -4,7 +4,7 @@ import { setup } from '../../../../../../test/setup'
 import { Union } from '../../models/union.model'
 import { unionResponse } from '../testHelpers'
 
-describe('createApplication', () => {
+describe('createUnion', () => {
   let app: INestApplication
   beforeAll(async () => {
     // create the nestjs test app
@@ -17,7 +17,7 @@ describe('createApplication', () => {
       .send({
         name: 'VR',
       })
-      .expect(200)
+      .expect(201)
 
     expect(response.body).toMatchObject(unionResponse)
   })

@@ -22,5 +22,5 @@ interface Application {
   modified: string
 }
 export function getGenericApplication(
-  application: Partial<Application>,
+  application?: Partial<Application>,
 ): Application

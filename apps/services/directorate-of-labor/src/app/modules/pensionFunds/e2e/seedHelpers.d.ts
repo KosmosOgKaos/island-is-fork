@@ -1,5 +1,5 @@
 interface PensionFund {
-  pensionFundId: string
+  pension_fund_id: string
   name: string
   active: boolean
   created: string

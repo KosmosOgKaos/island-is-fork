@@ -17,7 +17,7 @@ describe('createPensionFund', () => {
       .send({
         name: 'Stapi',
       })
-      .expect(200)
+      .expect(201)
 
     expect(response.body).toMatchObject(pensionFundResponse)
   })

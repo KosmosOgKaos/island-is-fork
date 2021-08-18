@@ -1,8 +1,8 @@
 const faker = require('faker')
 
 module.exports = {
-  getPensionFund: (pensionFund) => ({
-    pensionFundId: faker.random.uuid(),
+  getGenericPensionFund: (pensionFund) => ({
+    pension_fund_id: faker.random.uuid(),
     name: faker.lorem.words(2),
     active: true,
     created: new Date(),

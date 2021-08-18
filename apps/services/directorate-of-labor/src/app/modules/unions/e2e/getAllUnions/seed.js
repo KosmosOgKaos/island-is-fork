@@ -1,3 +1,3 @@
-const { getGenericApplication } = require('../seedHelpers')
+const { getGenericUnion } = require('../seedHelpers')
 
-module.exports = [getGenericApplication(), getGenericApplication()]
+module.exports = [getGenericUnion(), getGenericUnion()]
