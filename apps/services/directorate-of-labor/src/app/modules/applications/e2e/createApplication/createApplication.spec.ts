@@ -16,7 +16,7 @@ describe('createApplication', () => {
       .post('/v1/applications')
       .send({
         // eslint-disable-next-line local-rules/disallow-kennitalas
-        nationalId: '0101307789 ',
+        nationalId: '0101307789',
         secretWord: 'Some text',
         getPaperCopy: false,
         employmentStatus: 'Some text',
@@ -31,7 +31,7 @@ describe('createApplication', () => {
         insurancePayments: 10000,
         onParentalLeave: false,
       })
-      .expect(200)
+      .expect(201)
 
     expect(response.body).toMatchObject(applicationResponse)
   })
