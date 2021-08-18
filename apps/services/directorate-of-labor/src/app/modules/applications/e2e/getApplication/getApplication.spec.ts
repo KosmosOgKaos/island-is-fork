@@ -4,7 +4,7 @@ import { setup } from '../../../../../../test/setup'
 import { Application } from '../../models/application.model'
 import { applicationResponse } from '../testHelpers'
 
-describe('findAllEndorsement', () => {
+describe('getApplication', () => {
   let app: INestApplication
   beforeAll(async () => {
     // create the nestjs test app

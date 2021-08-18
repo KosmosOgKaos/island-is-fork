@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common'
 import { setup } from '../../../../../../test/setup'
 import { Application } from '../../models/application.model'
 
-describe('findAllEndorsement', () => {
+describe('getAllApplications', () => {
   let app: INestApplication
   beforeAll(async () => {
     // create the nestjs test app
