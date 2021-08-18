@@ -1,7 +1,7 @@
 const faker = require('faker')
 
 module.exports = {
-  getGenericApplication: () => ({
+  getGenericApplication: (application) => ({
     application_id: faker.random.uuid(),
     national_id: '0000000000',
     secret_word: faker.lorem.words(2),
@@ -23,5 +23,6 @@ module.exports = {
     private_pension_fund_id: faker.random.uuid(),
     created: new Date(),
     modified: new Date(),
+    ...application,
   }),
 }

@@ -1,10 +1,11 @@
 'use strict'
 
-const applicationsFindAll = require('../src/app/modules/applications/e2e/findAllEndorsement/seed.js')
+const getAllApplication = require('../src/app/modules/applications/e2e/getAllApplications/seed.js')
+const getApplication = require('../src/app/modules/applications/e2e/getApplication/seed.js')
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const applications = [...applicationsFindAll]
+    const applications = [...getAllApplication, ...getApplication]
 
     try {
       await queryInterface.bulkInsert('applications', applications)
