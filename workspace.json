@@ -2768,7 +2768,7 @@
             ]
           }
         },
-        "dev/init": {
+        "init": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
@@ -2784,7 +2784,7 @@
             "parallel": false
           }
         },
-        "dev": {
+        "start": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
