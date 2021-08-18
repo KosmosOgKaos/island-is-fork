@@ -9,8 +9,8 @@ import {
   BelongsTo,
   ForeignKey,
 } from 'sequelize-typescript'
-import { PensionFund } from './pensionFund.model'
-import { Union } from './union.model'
+import { PensionFund } from '../../pensionFunds/models/pensionFund.model'
+import { Union } from '../../unions/models/union.model'
 
 @Table({
   tableName: 'applications',

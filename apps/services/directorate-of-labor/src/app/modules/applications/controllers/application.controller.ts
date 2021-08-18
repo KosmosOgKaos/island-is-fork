@@ -1,4 +1,4 @@
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { ApiOkResponse } from '@nestjs/swagger'
 import {
   Body,
   Controller,
@@ -10,7 +10,7 @@ import {
   Delete,
 } from '@nestjs/common'
 import { Application } from '../models/application.model'
-import { DirectorateOfLaborService } from '../directorateOfLabor.service'
+import { ApplicationsService } from '../applications.service'
 import { CreateApplicationDto } from '../dto/createApplication.dto'
 import { UpdateApplicationDto } from '../dto/updateApplication.dto'
 
@@ -22,7 +22,7 @@ const assertExists = <T>(resource: T): void => {
 @Controller('v1/applications')
 export class ApplicationController {
   constructor(
-    private readonly directorateOfLaborService: DirectorateOfLaborService,
+    private readonly directorateOfLaborService: ApplicationsService,
   ) {}
 
   @Get()

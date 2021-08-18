@@ -5,18 +5,12 @@ import type { Logger } from '@island.is/logging'
 import { Application } from './models/application.model'
 import { CreateApplicationDto } from './dto/createApplication.dto'
 import { UpdateApplicationDto } from './dto/updateApplication.dto'
-import { Union } from './models/union.model'
-import { PensionFund } from './models/pensionFund.model'
 
 @Injectable()
-export class DirectorateOfLaborService {
+export class ApplicationsService {
   constructor(
     @InjectModel(Application)
     private applicationModel: typeof Application,
-    @InjectModel(Union)
-    private unionModel: typeof Union,
-    @InjectModel(PensionFund)
-    private pensionFundModel: typeof PensionFund,
     @Inject(LOGGER_PROVIDER)
     private logger: Logger,
   ) {}
@@ -65,17 +59,5 @@ export class DirectorateOfLaborService {
       where: { applicationId },
     })
     return count > 0
-  }
-
-  async getAllUnions(): Promise<Union[]> {
-    return await this.unionModel.findAll({
-      order: ['name'],
-    })
-  }
-
-  async getAllPensionFunds(): Promise<PensionFund[]> {
-    return await this.pensionFundModel.findAll({
-      order: ['name'],
-    })
   }
 }
