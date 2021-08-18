@@ -1,24 +1,10 @@
 import { ApiOkResponse } from '@nestjs/swagger'
-import {
-  Body,
-  Controller,
-  Get,
-  NotFoundException,
-  Param,
-  Post,
-  Put,
-  Delete,
-} from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, Put, Delete } from '@nestjs/common'
 import { Application } from '../models/application.model'
 import { ApplicationsService } from '../applications.service'
 import { CreateApplicationDto } from '../dto/createApplication.dto'
 import { UpdateApplicationDto } from '../dto/updateApplication.dto'
-
-const assertExists = <T>(resource: T): void => {
-  if (!resource) {
-    throw new NotFoundException("This resource doesn't exist")
-  }
-}
+import { assertExists } from '../../../lib/helpers'
 @Controller('v1/applications')
 export class ApplicationController {
   constructor(

@@ -1,14 +1,12 @@
-import { IsBoolean, IsOptional, IsString } from 'class-validator'
+import { IsBoolean, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 
-export class UpdateUnionDto {
+export class CreateUnionDto {
   @ApiProperty()
   @IsString()
-  @IsOptional()
   name!: string
 
   @ApiProperty()
   @IsBoolean()
-  @IsOptional()
   active!: string
 }
