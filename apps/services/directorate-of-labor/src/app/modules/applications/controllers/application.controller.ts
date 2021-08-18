@@ -1,5 +1,14 @@
 import { ApiOkResponse } from '@nestjs/swagger'
-import { Body, Controller, Get, Param, Post, Put, Delete } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Delete,
+  HttpCode,
+} from '@nestjs/common'
 import { Application } from '../models/application.model'
 import { ApplicationsService } from '../applications.service'
 import { CreateApplicationDto } from '../dto/createApplication.dto'
@@ -47,10 +56,12 @@ export class ApplicationController {
     return application
   }
 
+  @HttpCode(204)
   @Delete(':applicationId')
   async deleteApplication(
     @Param('applicationId') applicationId: string,
-  ): Promise<boolean> {
-    return await this.directorateOfLaborService.deleteApplication(applicationId)
+  ): Promise<void> {
+    await this.directorateOfLaborService.deleteApplication(applicationId)
+    return
   }
 }
