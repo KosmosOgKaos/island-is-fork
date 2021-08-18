@@ -39,7 +39,44 @@ describe('createApplication', () => {
       })
       .expect(400)
 
-    expect(response.body).toMatchObject(errorResponse)
+    expect(response.body).toMatchObject({
+      ...errorResponse,
+      message: ['property incomeStepOne should not exist'],
+    })
+  })
+
+  it(`POST /v1/applications should return message for all fields failing validation`, async () => {
+    const response: { body: Application[] } = await request(app.getHttpServer())
+      .post('/v1/applications')
+      .send({
+        ...validApplication,
+        unionId: 'not-a-valid-uuid', // ins not a valid uuid
+        monthlyIncome: '320000', // is not a number
+      })
+      .expect(400)
+
+    expect(response.body).toMatchObject({
+      ...errorResponse,
+      message: [
+        'unionId must be an UUID',
+        'monthlyIncome must be an integer number',
+      ],
+    })
+  })
+
+  it(`POST /v1/applications should report missing required fields`, async () => {
+    const response: { body: Application[] } = await request(app.getHttpServer())
+      .post('/v1/applications')
+      .send({
+        ...validApplication,
+        nationalId: undefined,
+      })
+      .expect(400)
+
+    expect(response.body).toMatchObject({
+      ...errorResponse,
+      message: ['nationalId contains an invalid national id for a person'],
+    })
   })
 
   it(`POST /v1/applications should create an application`, async () => {
