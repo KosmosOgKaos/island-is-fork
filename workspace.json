@@ -2541,6 +2541,29 @@
           "options": {
             "command": "yarn ts-node -P libs/localization/tsconfig.lib.json libs/localization/scripts/extract 'libs/application/party-application/src/lib/messages.ts'"
           }
+        },
+        "schemas/codegen": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "graphql-codegen --config libs/application/templates/party-application/codegen.yml"
+          }
+        },
+        "schemas/external-openapi-generator": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "nx run services-endorsements-api:schemas/external-openapi-generator",
+              "nx run services-endorsements-api:schemas/build-openapi",
+              "nx run application-templates-party-application:schemas/openapi-generator"
+            ],
+            "parallel": false
+          }
+        },
+        "schemas/openapi-generator": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "yarn openapi-generator -o libs/application/template-api-modules/src/lib/modules/templates/party-application/gen/fetch -i apps/services/endorsements/api/src/openapi.yaml --additional-properties=enumPropertyNaming=original"
+          }
         }
       }
     },
